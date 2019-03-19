@@ -6,8 +6,8 @@ from shop import views
 
 urlpatterns = [
     path('', views.Home.as_view(), name='home'),
-    path('product/', views.Product_list.as_view(), name='product'),
-    path('product/<slug:slug>/', views.Product_detail.as_view(), name='product-detail'),
+    path('shop/', views.Product_list.as_view(), name='product'),
+    path('shop/<slug:slug>/', views.Product_detail.as_view(), name='product-detail'),
     path('cart/', views.cart_detail, name='cart_detail'),
     path('cart/add/<int:product_id>', views.cart_add, name='cart_add'),
     path('cart/update/<int:product_id>', views.cart_update, name='cart_update'),
