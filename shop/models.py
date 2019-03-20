@@ -6,7 +6,7 @@ from django.urls import reverse
 
 class Category(models.Model):
     title = models.CharField(max_length=100, unique=True)
-    slug = models.SlugField(max_length=100, unique=True)
+    slug = models.SlugField(max_length=100, unique=True, allow_unicode=True)
     description = models.TextField(max_length=500, null=True, blank=True)
     parentCategory = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True,
                                        verbose_name="Parent Category")
@@ -17,7 +17,7 @@ class Category(models.Model):
 
 class Tag(models.Model):
     title = models.CharField(max_length=50, unique=True)
-    slug = models.SlugField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=50, unique=True, allow_unicode=True)
     description = models.TextField(max_length=500, null=True, blank=True)
 
     def __str__(self):
@@ -68,7 +68,7 @@ class City(models.Model):
 
 class Product(models.Model):
     title = models.CharField(max_length=100, unique=True)
-    slug = models.SlugField(max_length=100, unique=True)
+    slug = models.SlugField(max_length=100, unique=True, allow_unicode=True)
     content = models.TextField(max_length=2000)
     publish_date = models.DateTimeField(auto_now_add=True)
     writer = models.ForeignKey(User, on_delete=models.CASCADE)
