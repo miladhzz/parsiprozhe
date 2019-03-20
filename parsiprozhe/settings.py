@@ -78,20 +78,13 @@ WSGI_APPLICATION = 'parsiprozhe.wsgi.application'
 
 DATABASES = {
      'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'STORAGE_ENGINE': 'InnoDB',
+        'ENGINE': 'mysql.connector.django',
         'NAME': 'parsiprozhe',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         #'PORT': '3306',
-        'OPTIONS': {
-            'charset': 'utf8',
-            'init_command': 'SET '
-                'storage_engine=INNODB,'
-                'character_set_connection=utf8,'
-                'collation_connection=utf8_bin'
-        }
+
     }
 }
 
