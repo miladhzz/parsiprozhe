@@ -77,9 +77,21 @@ WSGI_APPLICATION = 'parsiprozhe.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+     'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'STORAGE_ENGINE': 'InnoDB',
+        'NAME': 'parsiprozhe',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        #'PORT': '3306',
+        'OPTIONS': {
+            'charset': 'utf8',
+            'init_command': 'SET '
+                'storage_engine=INNODB,'
+                'character_set_connection=utf8,'
+                'collation_connection=utf8_bin'
+        }
     }
 }
 
