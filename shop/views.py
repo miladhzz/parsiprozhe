@@ -1,52 +1,52 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import ListView, DetailView
-from django.views import View
-from .models import Product, OrderItem, Order, Category
+from django.views.generic import ListView
+from django.utils.encoding import uri_to_iri
+from .models import Product, OrderItem, Order
 from django.views.generic.base import ContextMixin
 from django.views.decorators.http import require_POST
-from .forms import  CartAddProductForm, CartUpdateProductForm, OrderCheckoutForm
+from .forms import CartAddProductForm, CartUpdateProductForm, OrderCheckoutForm
 from .cart import Cart
 
 
-class Form_Mixin(ContextMixin):
+class FormMixin(ContextMixin):
     def get_context_data(self, *args, **kwargs):
-        ctx = super(Form_Mixin, self).get_context_data(**kwargs)
+        ctx = super(FormMixin, self).get_context_data(**kwargs)
         ctx['cart_product_from'] = CartAddProductForm()
         return ctx
 
 
-class TopSel_Mixin(ContextMixin):
+class TopSelMixin(ContextMixin):
     def get_context_data(self, *args, **kwargs):
-        ctx = super(TopSel_Mixin, self).get_context_data(**kwargs)
+        ctx = super(TopSelMixin, self).get_context_data(**kwargs)
         ctx['top_sel'] = Product.objects.all()[9:12]
         return ctx
 
 
-class Recently_Mixin(ContextMixin):
+class RecentlyMixin(ContextMixin):
     def get_context_data(self, *args, **kwargs):
-        ctx = super(Recently_Mixin, self).get_context_data(**kwargs)
+        ctx = super(RecentlyMixin, self).get_context_data(**kwargs)
         ctx['recently_view'] = Product.objects.all()[3:9]
         return ctx
 
 
-class Latest_Mixin(ContextMixin):
+class LatestMixin(ContextMixin):
     def get_context_data(self, *args, **kwargs):
-        ctx = super(Latest_Mixin, self).get_context_data(**kwargs)
+        ctx = super(LatestMixin, self).get_context_data(**kwargs)
         ctx['latest_product'] = Product.objects.all()[3:9]
         return ctx
 
 
-class Product_list(Form_Mixin, ListView):
+class ProductList(FormMixin, ListView):
     model = Product
     template_name = 'product_list.html'
 
 
-class Product_detail(TopSel_Mixin, Latest_Mixin, Form_Mixin, DetailView):
-    model = Product
-    template_name = 'product_detail.html'
+def product_detail(request, slug):
+    product = get_object_or_404(Product, slug=uri_to_iri(slug))
+    return render(request, 'product_detail.html', {'product': product})
 
 
-class Home(TopSel_Mixin, Recently_Mixin, Latest_Mixin, Form_Mixin, ListView):
+class Home(TopSelMixin, RecentlyMixin, LatestMixin, FormMixin, ListView):
     model = Product
     template_name = "home.html"
 

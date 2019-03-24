@@ -78,12 +78,15 @@ WSGI_APPLICATION = 'parsiprozhe.wsgi.application'
 
 DATABASES = {
      'default': {
-        'ENGINE': 'mysql.connector.django',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'parsiprozhe',
         'USER': 'root',
         'PASSWORD': '',
-        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'HOST': 'localhost',
         #'PORT': '3306',
+        'OPTIONS': {
+            'charset': 'utf8',
+        },
 
     }
 }
