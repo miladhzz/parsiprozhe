@@ -43,7 +43,8 @@ class ProductList(FormMixin, ListView):
 
 def product_detail(request, slug):
     product = get_object_or_404(Product, slug=uri_to_iri(slug))
-    return render(request, 'product_detail.html', {'product': product})
+    return render(request, 'product_detail.html', {'product': product,
+                                                   'cart_product_from':CartAddProductForm() })
 
 
 class Home(TopSelMixin, RecentlyMixin, LatestMixin, FormMixin, ListView):
