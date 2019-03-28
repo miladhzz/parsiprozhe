@@ -143,7 +143,7 @@ class Product(models.Model):
 class Order(models.Model):
     name = models.CharField(max_length=200)
     family = models.CharField(max_length=200)
-    email = models.CharField(max_length=200)
+    email = models.EmailField(max_length=200)
     mobile = models.CharField(max_length=11)
     address = models.TextField(max_length=500, blank=True)
     order_note = models.CharField(max_length=200, blank=True)
@@ -231,9 +231,13 @@ class PaymentLog(models.Model):
 
 class Contact(models.Model):
     name = models.CharField(max_length=150)
-    email = models.CharField(max_length=200, )
+    email = models.EmailField(max_length=200, )
     mobile = models.CharField(max_length=11, blank=True)
     message = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.email
+
+    # def get_absolute_url(self):
+    #    return reverse('contact')

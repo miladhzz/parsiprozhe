@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, CreateView
 from django.utils.encoding import uri_to_iri
-from .models import Product, OrderItem, Order, Contact
+from .models import Product, OrderItem, Order
 from django.views.generic.base import ContextMixin
 from django.views.decorators.http import require_POST
-from .forms import CartAddProductForm, CartUpdateProductForm, OrderCheckoutForm, ContactForm
+from .forms import CartAddProductForm, CartUpdateProductForm, OrderCheckoutForm, ContactForm,RegisterForm
 from .cart import Cart
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 
 
 class FormMixin(ContextMixin):
@@ -131,3 +133,16 @@ class CategoryProductList(ListView):
 class ContactMe(CreateView):
     template_name = 'contact.html'
     form_class = ContactForm
+    success_url = '.'
+
+
+class SignUp(CreateView):
+    template_name = 'registration/register.html'
+    form_class = RegisterForm
+    success_url = '../login'
+
+
+@login_required
+def logout_user(request):
+    logout(request)
+    return render(request, 'registration/logout.html')

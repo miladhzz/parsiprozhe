@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} پارسی پروژه - خروج {% endblock %}
+{% block content %}
+<h1>شما از سایت خارج شدید</h1>
+    <a href="{% url 'login' %}">Log in again</a>
+{% endblock %}

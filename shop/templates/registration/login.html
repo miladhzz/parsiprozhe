@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} پارسی پروژه - ورود {% endblock %}
+{% block content %}
+    <h1>ورود به سایت</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Login</button>
+    </form>
+    <br />
+    <a href="{% url 'register' %}">Register</a>
+{% endblock %}
