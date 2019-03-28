@@ -24,7 +24,7 @@ class Tag(models.Model):
         return self.title
 
 
-class Image_gallery(models.Model):
+class ImageGallery(models.Model):
     title = models.CharField(max_length=100, unique=True)
     pic = models.ImageField(upload_to='upload/images', default='upload/images/no-img.jpg')
     alt = models.CharField(max_length=200, null=True, blank=True)
@@ -38,7 +38,7 @@ class Image_gallery(models.Model):
         verbose_name_plural = 'Image Gallery'
 
 
-class File_gallery(models.Model):
+class FileGallery(models.Model):
     title = models.CharField(max_length=100, unique=True)
     file = models.FileField(upload_to='media/upload/files')
     description = models.CharField(max_length=200, null=True, blank=True)
@@ -127,8 +127,8 @@ class Product(models.Model):
     category = models.ManyToManyField(Category, blank=True)
     pic = models.ImageField(upload_to='upload/product/images', default='upload/images/no-img.jpg')
     summary = models.CharField(max_length=100, blank=True)
-    image_gallery = models.ManyToManyField(Image_gallery, blank=True)
-    files = models.ManyToManyField(File_gallery, blank=True)
+    image_gallery = models.ManyToManyField(ImageGallery, blank=True)
+    files = models.ManyToManyField(FileGallery, blank=True)
     count_of_download = models.IntegerField(null=True)
     related_product = models.ManyToManyField('self', blank=True,
                                              verbose_name="Related Product")
@@ -202,7 +202,7 @@ class OrderItem(models.Model):
         return self.price * self.count
 
 
-class Payment_log(models.Model):
+class PaymentLog(models.Model):
     order = models.ForeignKey(Order, on_delete=models.DO_NOTHING)
     date = models.DateTimeField(auto_now_add=True)
     payment_code = models.CharField(max_length=200, unique=True)
@@ -227,3 +227,13 @@ class Payment_log(models.Model):
 
     def __str__(self):
         return 'Order Id:%s Payment Code:%s' % (self.order, self.payment_code)
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=150)
+    email = models.CharField(max_length=200, )
+    mobile = models.CharField(max_length=11, blank=True)
+    message = models.TextField()
+
+    def __str__(self):
+        return self.email

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} پارسی پروژه - تماس با ما {% endblock %}
+{% block content %}
+
+<h1>
+    تماس با ما
+</h1>
+<form action="." method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="ارسال">
+</form>
+
+{% endblock %}

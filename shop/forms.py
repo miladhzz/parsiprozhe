@@ -1,5 +1,5 @@
 from django import forms
-from .models import Order, Product
+from .models import Order, Contact
 
 PRODUCT_COUNT_CHOICES = [(i, str(i)) for i in range(1, 21)]
 
@@ -30,3 +30,11 @@ class OrderCheckoutForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ('name', 'family', 'email', 'mobile', 'is_accept_agreement')
+
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = ['name', 'mobile', 'email', 'message']
+
+

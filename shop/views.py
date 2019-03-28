@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
 from django.utils.encoding import uri_to_iri
-from .models import Product, OrderItem, Order
+from .models import Product, OrderItem, Order, Contact
 from django.views.generic.base import ContextMixin
 from django.views.decorators.http import require_POST
-from .forms import CartAddProductForm, CartUpdateProductForm, OrderCheckoutForm
+from .forms import CartAddProductForm, CartUpdateProductForm, OrderCheckoutForm, ContactForm
 from .cart import Cart
 
 
@@ -127,3 +127,7 @@ class CategoryProductList(ListView):
         queryset = Product.objects.filter()
         return queryset
 
+
+class ContactMe(CreateView):
+    template_name = 'contact.html'
+    form_class = ContactForm
