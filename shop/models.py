@@ -69,7 +69,7 @@ class City(models.Model):
 class Product(models.Model):
     title = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True, allow_unicode=True)
-    content = models.TextField(max_length=2000)
+    content = models.TextField()
     publish_date = models.DateTimeField(auto_now_add=True)
     writer = models.ForeignKey(User, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag, blank=True)
@@ -129,7 +129,7 @@ class Product(models.Model):
     summary = models.CharField(max_length=100, blank=True)
     image_gallery = models.ManyToManyField(ImageGallery, blank=True)
     files = models.ManyToManyField(FileGallery, blank=True)
-    count_of_download = models.IntegerField(null=True)
+    count_of_download = models.PositiveIntegerField(null=True)
     related_product = models.ManyToManyField('self', blank=True,
                                              verbose_name="Related Product")
 
