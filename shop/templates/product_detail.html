@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-bit-title text-center">
-                        <h2>Shop</h2>
+                        <h2>فروشگاه</h2>
                     </div>
                 </div>
             </div>
@@ -20,41 +20,7 @@
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
-                    <div class="single-sidebar">
-                        <h2 class="sidebar-title">Search Products</h2>
-                        <form action="">
-                            <input type="text" placeholder="Search products...">
-                            <input type="submit" value="Search">
-                        </form>
-                    </div>
-                    
-                    <div class="single-sidebar">
-                        <h2 class="sidebar-title">Products</h2>
-                        {% for product in latest_product|slice:"5" %}
-                        <div class="thubmnail-recent">
-                            <img src="{{ product.pic.url }}" class="recent-thumb" alt="">
-                            <h2><a href="{{ product.get_absolute_url }}">{{ product.title|slice:"35" }}</a></h2>
-                            <div class="product-sidebar-price">
-                               <ins>{{ product.price }}</ins> {% if product.has_discount %}<del>{{ product.super_price }}</del> {% endif %}
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                    
-                    <div class="single-sidebar">
-                        <h2 class="sidebar-title">Recent Posts</h2>
-                        <ul>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <div class="product-content-right">
                         <div class="product-breadcroumb">
                             <a href="">Home</a>
@@ -88,15 +54,15 @@
                                     <form action="{% url 'cart_add' product.id %}" method="post">
                                         {{ cart_product_from }}
                                         {% csrf_token %}
-                                        <input type="submit" value="Add to cart"/>
+                                        <input type="submit" value="افزودن به سبد خريد"/>
                                     </form>
                                     
                                     <div class="product-inner-category">
-                                        <p>Category:
+                                        <p>دسته بندي:
                                             {% for category in product.category.all %}
                                                  <a href="{% url 'category' category.slug  %}">{{ category.title }}</a>
                                             {% endfor %}
-                                        . Tags:
+                                        . تگ ها:
                                             {% for tag in product.tags.all %}
                                             <a href="">{{ tag.title }}</a>,
                                             {% endfor %}
@@ -104,13 +70,13 @@
                                     
                                     <div role="tabpanel">
                                         <ul class="product-tab" role="tablist">
-                                            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Description</a></li>
-                                            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Reviews</a></li>
+                                            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">توضيحات</a></li>
+                                            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">نظرات کاربران</a></li>
                                         </ul>
                                         <div class="tab-content">
                                             <div role="tabpanel" class="tab-pane fade in active" id="home">
-                                                <h2>Product Description</h2>  
-                                                {{ product.content }}
+                                                <h2>توضيحات محصول</h2>
+                                                {{ product.content|safe }}
                                             </div>
                                             <div role="tabpanel" class="tab-pane fade" id="profile">
                                                 <h2>Reviews</h2>
@@ -141,7 +107,7 @@
                         
                         
                         <div class="related-products-wrapper">
-                            <h2 class="related-products-title">Related Products</h2>
+                            <h2 class="related-products-title">برخي محصولات مرتبط</h2>
                             <div class="related-products-carousel">
                                 {% for related_item in product.related_product.all|slice:":3" %}
                                 <div class="single-product">

@@ -1,3 +1,5 @@
 
 *.PNG
 .idea/workspace.xml
+*.jpg
+*.gif

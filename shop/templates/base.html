@@ -46,23 +46,23 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="{% url 'home' %}">Home</a></li>
-                        <li><a href="{% url 'product' %}">Shop</a></li>
-                        <li><a href="single-product.html">Blog</a></li>
+                        <li><a href="{% url 'home' %}">خانه</a></li>
+                        <li><a href="{% url 'product' %}">فروشگاه</a></li>
+                        <li><a href="single-product.html">وبلاگ</a></li>
                         {% if request.user.is_authenticated %}
-                            <li><a href="{% url 'logout' %}">Log Out</a></li>
+                            <li><a href="{% url 'logout' %}">خروج</a></li>
                         {% else %}
-                            <li><a href="{% url 'register' %}">Register</a></li>
-                            <li><a href="{% url 'login' %}">Login</a></li>
+                            <li><a href="{% url 'register' %}">ثبت نام</a></li>
+                            <li><a href="{% url 'login' %}">ورود</a></li>
                         {% endif %}
-                        <li><a href="#">About</a></li>
-                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                        <li><a href="#">درباره ما</a></li>
+                        <li><a href="{% url 'contact' %}">تماس با ما</a></li>
                         <li>
                             {%if cart|length > 0%}
-                                <a class="cart" href="{% url 'cart_detail' %}">Cart - <span class="cart-amunt">${{ cart.get_total_price }}</span> <i class="fa fa-shopping-cart"></i>
+                                <a class="cart" href="{% url 'cart_detail' %}">سبد خريد - <span class="cart-amunt">${{ cart.get_total_price }}</span> <i class="fa fa-shopping-cart"></i>
                                 <span class="product-count">{{ cart|length }}</span></a>
                             {% else %}
-                                <a class="cart" href="#">Cart is empty!</a>
+                                <a class="cart" href="#">سبد خريد خالي است!</a>
                             {% endif %}
                         </li>
                     </ul>
