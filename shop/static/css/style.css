@@ -13,10 +13,7 @@
     margin: 0 auto 15px;
 }
 a:focus { outline: 0px solid }
-img {
-    max-width: 100%;
-    height: auto;
-}
+
 .fix { overflow: hidden }
 h1,
 h2,
@@ -1156,6 +1153,15 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 div.product-upper{
     text-align: center;
     border: 1px solid #d4c7c7;
-    min-height: 250px;
+    height: 250px;
+    overflow: hidden;
     margin-bottom: 10px;
+}
+div.product-upper > img{
+    max-width: 100%;
+    height: auto;
+}
+img {
+    /*max-width: 100%;
+    height: auto;*/
 }

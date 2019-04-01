@@ -3,7 +3,7 @@
 {% block title %} پارسی پروژه {% endblock %}
 {% block content %}
 
-    <div class="slider-area">
+    <div class="slider-area" style="direction: ltr">
         	<!-- Slider -->
 			<div class="block-slider block-slider4">
 				<ul class="" id="bxslider-home4">
@@ -88,9 +88,9 @@
                 <div class="col-md-12">
                     <div class="latest-product">
                         <h2 class="section-title">جدیدترین محصولات</h2>
-                        <div class="product-carousel">
+                        <div class="product-carousel" style="direction: ltr">
                             {% for product in product_list %}
-                            <div class="single-product">
+                            <div class="single-product" style="direction: rtl">
                                 <div class="product-f-image">
                                     <img src="{{ product.pic.url }}" alt="{{ product.alt }}">
                                     <div class="product-hover">
