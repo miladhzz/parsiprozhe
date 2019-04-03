@@ -26,7 +26,9 @@
                     <div class="col-md-3 col-sm-6">
                         <div class="single-shop-product">
                             <div class="product-upper">
+                                <a href="{{ product.get_absolute_url }}">
                                 <img src="{{ product.pic.url }}" alt="{{ product.alt }}" width="190">
+                                </a>
                             </div>
                             <div class="product-carousel-title">
                                 <a href="{{ product.get_absolute_url }}">{% my_slice product.title %}</a>

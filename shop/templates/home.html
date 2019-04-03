@@ -89,7 +89,7 @@
                     <div class="latest-product">
                         <h2 class="section-title">جدیدترین محصولات</h2>
                         <div class="product-carousel" style="direction: ltr">
-                            {% for product in product_list %}
+                            {% for product in product_list.all|slice:":12" %}
                             <div class="single-product" style="direction: rtl">
                                 <div class="product-f-image">
                                     <img src="{{ product.pic.url }}" alt="{{ product.alt }}">
@@ -115,29 +115,7 @@
                 </div>
             </div>
         </div>
-    </div> <!-- End main content area -->
-
-    <div class="brands-area">
-        <div class="zigzag-bottom"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="brand-wrapper">
-                        <div class="brand-list">
-                            <img src="{% static "img/brand1.png" %}" alt="">
-                            <img src="{% static "img/brand2.png" %}" alt="">
-                            <img src="{% static "img/brand3.png" %}" alt="">
-                            <img src="{% static "img/brand4.png" %}" alt="">
-                            <img src="{% static "img/brand5.png" %}" alt="">
-                            <img src="{% static "img/brand6.png" %}" alt="">
-                            <img src="{% static "img/brand1.png" %}" alt="">
-                            <img src="{% static "img/brand2.png" %}" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> <!-- End brands area -->
+    </div> <!-- End main content area -->    
 
     <div class="product-widget-area">
         <div class="zigzag-bottom"></div>
@@ -146,7 +124,7 @@
                 <div class="col-md-4">
                     <div class="single-product-widget">
                         <h2 class="product-wid-title">پرفروش ترین ها</h2>
-                        <a href="" class="wid-view-more">View All</a>
+                        <a href="" class="wid-view-more">نمایش همه</a>
                         {% for product in top_sel|slice:"3" %}
                         <div class="single-wid-product">
                             <a href="{{ product.get_absolute_url }}"><img src="{{ product.pic.url }}" alt="{{ product.title }}" class="product-thumb"></a>
@@ -168,7 +146,7 @@
                 <div class="col-md-4">
                     <div class="single-product-widget">
                         <h2 class="product-wid-title">اخیرا بازدید شده</h2>
-                        <a href="#" class="wid-view-more">View All</a>
+                        <a href="#" class="wid-view-more">نمایش همه</a>
                         {% for product in recently_view|slice:"3" %}
                         <div class="single-wid-product">
                             <a href="{{ product.get_absolute_url }}"><img src="{{ product.pic.url }}" alt="{{ product.title }}" class="product-thumb"></a>
@@ -190,7 +168,7 @@
                 <div class="col-md-4">
                     <div class="single-product-widget">
                         <h2 class="product-wid-title">جدیدترین ها</h2>
-                        <a href="#" class="wid-view-more">View All</a>
+                        <a href="#" class="wid-view-more">نمایش همه</a>
                         {% for product in latest_product|slice:"3" %}
                         <div class="single-wid-product">
                             <a href="{{ product.get_absolute_url }}"><img src="{{ product.pic.url }}" alt="{{ product.title }}" class="product-thumb"></a>

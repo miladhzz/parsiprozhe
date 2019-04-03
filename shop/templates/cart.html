@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-bit-title text-center">
-                        <h2>Shopping Cart</h2>
+                        <h2>سبد خرید</h2>
                     </div>
                 </div>
             </div>
@@ -19,9 +19,9 @@
         <div class="container">
             {% if cart|length == 0 %}
                     <div>
-                        <h3>Cart is empty!</h3>
+                        <h3>سبد خرید خالی است!</h3>
                     <br />
-                    <a class="btn btn-primary" href="{% url 'product' %}">Return to Product List</a>
+                    <a class="btn btn-primary" href="{% url 'product' %}">بازگشت به لیست محصولات</a>
                     </div>
             {% else %}
                     <div class="row">
@@ -32,12 +32,12 @@
                                 <table cellspacing="0" class="shop_table cart">
                                     <thead>
                                         <tr>
-                                            <th class="product-remove">Remove</th>
-                                            <th class="product-thumbnail">Image</th>
-                                            <th class="product-name">Product</th>
-                                            <th class="product-price">Price</th>
-                                            <th class="product-quantity">Quantity</th>
-                                            <th class="product-subtotal">Total</th>
+                                            <th class="product-remove">حذف</th>
+                                            <th class="product-thumbnail">تصویر</th>
+                                            <th class="product-name">محصول</th>
+                                            <th class="product-price">قیمت</th>
+                                            <th class="product-quantity">تعداد</th>
+                                            <th class="product-subtotal">جمع</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -63,10 +63,10 @@
                                             <td class="product-quantity">
                                                 <div class="quantity buttons_added">
                                                     <form action="{% url 'cart_update' product.id %}" method="post">
-                                                        count: {{ item.update_count_from.count }}
+                                                        تعداد: {{ item.update_count_from.count }}
                                                         {{ item.update_count_from.update }}
                                                         {% csrf_token %}
-                                                        <input type="submit" value="update"/>
+                                                        <input type="submit" value="بروز رسانی"/>
                                                     </form>
                                                 </div>
                                             </td>
@@ -82,12 +82,12 @@
                                         <tr>
                                             <td class="actions" colspan="6">
                                                 <div class="coupon">
-                                                    <label for="coupon_code">Coupon:</label>
-                                                    <input type="text" placeholder="Coupon code" value="" id="coupon_code" class="input-text" name="coupon_code">
-                                                    <input type="submit" value="Apply Coupon" name="apply_coupon" class="button">
+                                                    <label for="coupon_code">کد تخفیف:</label>
+                                                    <input type="text" placeholder="کد تخفیف" value="" id="coupon_code" class="input-text" name="coupon_code">
+                                                    <input type="submit" value="اعمال  کد تخفیف" name="apply_coupon" class="button">
                                                 </div>
                                                 <!--<input type="submit" value="Update Cart" name="update_cart" class="button">-->
-                                                <a href="{% url 'checkout' %}"  class="checkout-button wc-forward">Checkout</a>
+                                                <a href="{% url 'checkout' %}"  class="checkout-button wc-forward">تکمیل خرید</a>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -99,22 +99,22 @@
                 <div class="col-md-4">
                     <div class="cart-collaterals">
                             <div class="cart_totals ">
-                                <h2>Cart Totals</h2>
+                                <h2>مجموع</h2>
 
                                 <table cellspacing="0">
                                     <tbody>
                                         <tr class="cart-subtotal">
-                                            <th>Cart Subtotal</th>
+                                            <th>مجموع سبد خرید</th>
                                             <td><span class="amount">${{ cart.get_total_price }}</span></td>
                                         </tr>
 
                                         <tr class="shipping">
-                                            <th>Shipping and Handling</th>
-                                            <td>Free Shipping</td>
+                                            <th>هزینه پشتبانی</th>
+                                            <td>رایگان</td>
                                         </tr>
 
                                         <tr class="order-total">
-                                            <th>Order Total</th>
+                                            <th>مجموع سفارش</th>
                                             <td><strong><span class="amount">${{ cart.get_total_price }}</span></strong> </td>
                                         </tr>
                                     </tbody>

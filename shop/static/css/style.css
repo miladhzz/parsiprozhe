@@ -380,6 +380,12 @@ a.cart{
 
 .product-f-image {
     position: relative;
+    overflow: hidden;
+    height: 250px;
+}
+.product-f-image > img{
+  max-width :100%;
+  height: auto;
 }
 .product-hover {
     height: 100%;
@@ -540,7 +546,7 @@ a.cart{
     color: #fff;
     padding: 3px 15px;
     position: absolute;
-    right: 10px;
+    left: 10px;
     top: 3px;
 }
 .wid-view-more:hover {color: #fff;background-color: #222;text-decoration: none}
@@ -1139,11 +1145,16 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 .product-option-shop {
     margin-top: 15px;
 }
-
+.product-option-shop form > input{
+  display: block;
+  margin: 0 auto;
+}
 .single-shop-product {
     margin-bottom: 50px;
     width: 220px;
-
+    border: 1px solid #d4c7c7;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 .pagination > li > a, .pagination > li > span {
@@ -1152,7 +1163,7 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 
 div.product-upper{
     text-align: center;
-    border: 1px solid #d4c7c7;
+    /*border: 1px solid #d4c7c7;*/
     height: 250px;
     overflow: hidden;
     margin-bottom: 10px;
