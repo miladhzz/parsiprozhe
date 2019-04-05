@@ -8,6 +8,7 @@ from .forms import CartAddProductForm, CartUpdateProductForm, OrderCheckoutForm,
 from .cart import Cart
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 class FormMixin(ContextMixin):
@@ -41,6 +42,8 @@ class LatestMixin(ContextMixin):
 class ProductList(FormMixin, ListView):
     model = Product
     template_name = 'product_list.html'
+    paginate_by = 12
+    queryset = Product.objects.all()
 
 
 def product_detail(request, slug):
