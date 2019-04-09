@@ -97,9 +97,9 @@
                                         <form action="{% url 'cart_add' product.id %}" method="post">
                                                 {{ cart_product_from }}
                                                 {% csrf_token %}
-                                                <input class="add-to-cart-link" type="submit" value="Add to cart"/>
+                                                <input class="add-to-cart-link" type="submit" value="افزودن به سبد"/>
                                             </form>
-                                        <a href="{{ product.get_absolute_url }}" class="view-details-link"><i class="fa fa-link"></i> See details</a>
+                                        <a href="{{ product.get_absolute_url }}" class="view-details-link"><i class="fa fa-link"></i> مشاهده جزئیات</a>
                                     </div>
                                 </div>
 

@@ -8,7 +8,7 @@ from .forms import CartAddProductForm, CartUpdateProductForm, OrderCheckoutForm,
 from .cart import Cart
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+# from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 class FormMixin(ContextMixin):

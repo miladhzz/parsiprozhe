@@ -1,3 +1,53 @@
+@font-face @font-face {
+	font-family: IRANSans;
+	font-style: normal;
+	font-weight: bold;
+	src: url('../fonts/eot/IRANSansWeb(FaNum)_Bold.eot');
+	src: url('../fonts/eot/IRANSansWeb(FaNum)_Bold.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+		 url('../fonts/woff2/IRANSansWeb(FaNum)_Bold.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+		 url('../fonts/woff/IRANSansWeb(FaNum)_Bold.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+		 url('../fonts/ttf/IRANSansWeb(FaNum)_Bold.ttf') format('truetype');
+}
+@font-face {
+	font-family: IRANSans;
+	font-style: normal;
+	font-weight: 500;
+	src: url('../fonts/eot/IRANSansWeb(FaNum)_Medium.eot');
+	src: url('../fonts/eot/IRANSansWeb(FaNum)_Bold.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+		 url('../fonts/woff2/IRANSansWeb(FaNum)_Medium.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+		 url('../fonts/woff/IRANSansWeb(FaNum)_Medium.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+		 url('../fonts/ttf/IRANSansWeb(FaNum)_Medium.ttf') format('truetype');
+}
+@font-face {
+	font-family: IRANSans;
+	font-style: normal;
+	font-weight: 300;
+	src: url('../fonts/eot/IRANSansWeb(FaNum)_Light.eot');
+	src: url('../fonts/eot/IRANSansWeb(FaNum)_Bold.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+		 url('../fonts/woff2/IRANSansWeb(FaNum)_Light.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+		 url('../fonts/woff/IRANSansWeb(FaNum)_Light.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+		 url('../fonts/ttf/IRANSansWeb(FaNum)_Light.ttf') format('truetype');
+}
+@font-face {
+	font-family: IRANSans;
+	font-style: normal;
+	font-weight: 200;
+	src: url('../fonts/eot/IRANSansWeb(FaNum)_UltraLight.eot');
+	src: url('../fonts/eot/IRANSansWeb(FaNum)_UltraLight.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+		 url('../fonts/woff2/IRANSansWeb(FaNum)_UltraLight.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+		 url('../fonts/woff/IRANSansWeb(FaNum)_UltraLight.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+		 url('../fonts/ttf/IRANSansWeb(FaNum)_UltraLight.ttf') format('truetype');
+}
+@font-face {
+	font-family: IRANSans;
+	font-style: normal;
+	font-weight: normal;/
+	src: url('../fonts/eot/IRANSansWeb(FaNum).eot');
+	src: url('../fonts/eot/IRANSansWeb(FaNum).eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+		 url('../fonts/woff2/IRANSansWeb(FaNum).woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+		 url('../fonts/woff/IRANSansWeb(FaNum).woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+		 url('../fonts/ttf/IRANSansWeb(FaNum).ttf') format('truetype');
+}
 .floatleft { float: left }
 .floatright { float: right }
 .alignleft {
@@ -12,7 +62,7 @@
     display: block;
     margin: 0 auto 15px;
 }
-a:focus { outline: 0px solid }
+a:focus { outline: 0 solid }
 
 .fix { overflow: hidden }
 h1,
@@ -23,7 +73,7 @@ h5,
 h6 {
     margin: 0 0 15px;
 }
-body { font-family:Arial, Helvetica, sans-serif; }
+body { font-family:IRANSans; }
 
 
 
@@ -71,7 +121,7 @@ body { font-family:Arial, Helvetica, sans-serif; }
 }
 
 .mainmenu-area {background: none repeat scroll 0 0 #fbfbfb;
-font-family: "Roboto Condensed",sans-serif;
+font-family: IRANSans;
 text-transform: uppercase;
 width: 100%;
 z-index: 999;}
@@ -303,7 +353,7 @@ a.cart{
 }
 
 .button-radius .icon:before{
-  font-family: 'FontAwesome';
+  font-family: IRANSans;
   content: "\f105";
   font-size: 14px;
   color: #fff;
@@ -370,7 +420,7 @@ a.cart{
 .promo3 { background:#fa8072;}
 .promo4 { background:#4abebd;}
 .section-title {
-  font-family: "Raleway",sans-serif;
+  font-family: IRANSans;
   font-size: 50px;
   font-weight: 100;
   margin-bottom: 50px;
@@ -504,7 +554,7 @@ a.cart{
 .maincontent-area {padding-bottom: 50px; padding-top:20px;}
 
 .product-wid-title {
-  font-family: raleway;
+  font-family: IRANSans;
   font-size: 30px;
   font-weight: 100;
   margin-bottom: 40px;
@@ -569,7 +619,7 @@ padding: 35px 0 180px;}
   color: #5a88ca;
 }
 .footer-wid-title {
-  font-family: raleway;
+  font-family: IRANSans;
   font-size: 30px;
   font-weight: 100;color: #fff
 }
@@ -694,7 +744,7 @@ width: 10px;
 .product-big-title-area {background: url(../img/crossword.png) repeat scroll 0 0 #5a88ca}
 
 .product-bit-title h2 {
-  font-family: raleway;
+  font-family: IRANSans;
   font-size: 50px;
   font-weight: 200;
   margin: 0;
