@@ -28,7 +28,6 @@ class CartUpdateProductForm(forms.Form):
 
 
 class OrderCheckoutForm(forms.ModelForm):
-
     class Meta:
         model = Order
         fields = ('name', 'family', 'email', 'mobile', 'is_accept_agreement')
@@ -41,9 +40,12 @@ class ContactForm(forms.ModelForm):
 
 
 class RegisterForm(UserCreationForm):
-    first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
-    last_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
-    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
+    def __init__(self, *args, **kwargs):
+        super(RegisterForm, self).__init__(*args, **kwargs)
+        self.fields['password1'].label = 'رمز عبور'
+        self.fields['password2'].label = 'تکرار رمز عبور'
+        self.fields['password1'].help_text = ' '
+        self.fields['password2'].help_text = ' '
 
     class Meta:
         model = User
@@ -55,3 +57,22 @@ class RegisterForm(UserCreationForm):
             'password1',
             'password2',
         )
+        labels = {
+            'username': 'نام کاربری',
+            'first_name': 'نام',
+            'last_name': 'نام خانوادگی',
+            'email': 'ایمیل',
+        }
+        help_texts = {
+            'username': '',
+            'first_name': '',
+            'last_name': '',
+            'email': '',
+            'password1': '',
+            'password2': '',
+        }
+        '''error_messages = {
+            'password1': {
+                'max_length': "This mmmmm writer's name is too long.",
+            },
+        }'''

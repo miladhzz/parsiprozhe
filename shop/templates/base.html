@@ -62,7 +62,6 @@
                             <li><a href="{% url 'register' %}">ثبت نام</a></li>
                             <li><a href="{% url 'login' %}">ورود</a></li>
                         {% endif %}
-                        <li><a href="single-product.html">وبلاگ</a></li>
                         <li><a href="{% url 'product' %}">فروشگاه</a></li>
                         <li><a href="{% url 'home' %}">خانه</a></li>
                         
@@ -96,9 +95,8 @@
                     <div class="footer-menu">
                         <h2 class="footer-wid-title">ناوبری</h2>
                         <ul>
-                            <li><a href="#">فروشگاه</a></li>
-                            <li><a href="#">وبلاگ</a></li>
-                            <li><a href="#">تماس با ما</a></li>
+                            <li><a href="{% url 'product' %}">فروشگاه</a></li>
+                            <li><a href="{% url 'contact' %}">تماس با ما</a></li>
                             <li><a href="#">درباره ما</a></li>
                             <li><a href="#">قوانین و مقررات</a></li>
                         </ul>
@@ -113,7 +111,6 @@
                             <li><a href="#">فایل های رایگان</a></li>
                             <li><a href="#">پروژه های دانشجویی</a></li>
                             <li><a href="#">پروژه های سفارشی</a></li>
-                            <li><a href="#">فیلم ها</a></li>
                         </ul>
                     </div>
                 </div>
@@ -133,28 +130,6 @@
             </div>
         </div>
     </div> <!-- End footer top area -->
-
-    <div class="footer-bottom-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="copyright">
-                        <p>&copy; 2015 uCommerce. All Rights Reserved. <a href="http://www.freshdesignweb.com" target="_blank">freshDesignweb.com</a></p>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="footer-card-icon">
-                        <i class="fa fa-cc-discover"></i>
-                        <i class="fa fa-cc-mastercard"></i>
-                        <i class="fa fa-cc-paypal"></i>
-                        <i class="fa fa-cc-visa"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> <!-- End footer bottom area -->
-
     <script src="{% static "js/jquery.min.js" %}"></script>
     <!-- Bootstrap JS form CDN -->
     <script src="{% static "js/bootstrap.min.js"%}"></script>
