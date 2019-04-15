@@ -4,11 +4,10 @@ from django.utils.encoding import uri_to_iri
 from .models import Product, OrderItem, Order
 from django.views.generic.base import ContextMixin
 from django.views.decorators.http import require_POST
-from .forms import CartAddProductForm, CartUpdateProductForm, OrderCheckoutForm, ContactForm,RegisterForm
+from .forms import CartAddProductForm, CartUpdateProductForm, OrderCheckoutForm, ContactForm, RegisterForm
 from .cart import Cart
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-# from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 class FormMixin(ContextMixin):
@@ -149,3 +148,5 @@ class SignUp(CreateView):
 def logout_user(request):
     logout(request)
     return render(request, 'registration/logout.html')
+
+

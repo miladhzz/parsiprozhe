@@ -13,11 +13,18 @@
             </div>
         </div>
     </div>
-    <form method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit">Login</button>
+    <form method="POST">
+        {% csrf_token %}
+        <p>
+            <label>نام کاربری</label>
+            <input type="text" name="username">
+        </p>
+        <p>
+            <label>رمز عبور</label>
+            <input type="password" name="password">
+        </p>
+        <button type="submit">ورود</button>
     </form>
     <br />
-    <a href="{% url 'register' %}">Register</a>
+    <a href="{% url 'register' %}">ثبت نام</a>
 {% endblock %}
