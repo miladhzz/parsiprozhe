@@ -31,14 +31,26 @@ class OrderCheckoutForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ('name', 'family', 'email', 'mobile', 'is_accept_agreement')
+        labels = { 
+            'name': 'نام',
+            'family': 'نام خانوادگی',
+            'mobile': 'موبایل',
+            'email': 'ایمیل',
+            'is_accept_agreement': 'با قوانین پارسی پروژه موافقم'
+        }
 
 
 class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
         fields = ['name', 'mobile', 'email', 'message']
-
-
+        labels = { 
+            'name': 'نام',
+            'mobile': 'موبایل',
+            'email': 'ایمیل',
+            'message': 'متن پیام'
+        }
+            
 class RegisterForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super(RegisterForm, self).__init__(*args, **kwargs)
