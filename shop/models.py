@@ -86,9 +86,9 @@ class Product(models.Model):
         choices=Order_state,
         default=DRAFT,
     )
-    price = models.DecimalField(max_digits=11, decimal_places=2, default=0)
+    price = models.DecimalField(max_digits=11, decimal_places=0, default=0)
     has_discount = models.BooleanField(default=False)
-    super_price = models.DecimalField(max_digits=11, decimal_places=2, default=0, null=True, blank=True)
+    super_price = models.DecimalField(max_digits=11, decimal_places=0, default=0, null=True, blank=True)
     DOWNLOAD = 1
     POSTAL = 2
     Product_types = (
@@ -193,7 +193,7 @@ class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     count = models.IntegerField()
-    price = models.DecimalField(max_digits=11, decimal_places=2, default=0)
+    price = models.DecimalField(max_digits=11, decimal_places=0, default=0)
 
     def __str__(self):
         return 'Order id:%s Product:%s' % (self.order, self.product)

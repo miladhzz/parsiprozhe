@@ -34,7 +34,21 @@
                                 <a href="{{ product.get_absolute_url }}">{% my_slice product.title %}</a>
                             </div>
                             <div class="product-carousel-price">
-                                <ins>{{ product.price }}</ins> {% if product.has_discount %}<del>{{ product.super_price }}</del> {% endif %}
+                                {% if product.has_discount %}
+                                    {% if product.super_price == 0 %}
+                                        <ins>رایگان</ins>
+                                        <del>{{ product.price }}تومان</del>
+                                        {% else %}
+                                    <ins>{{ product.super_price }}تومان</ins>
+                                    <del>{{ product.price }}تومان</del>
+                                        {% endif %}
+                                    {% else %}
+                                    {% if product.price == 0 %}
+                                        <ins>رایگان</ins>
+                                        {% else %}
+                                        <ins>{{ product.price }}تومان</ins>
+                                     {% endif %}
+                                {% endif %}
                             </div>
 
                             <div class="product-option-shop">

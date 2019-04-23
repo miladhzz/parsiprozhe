@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-bit-title text-center">
-                        <h2>Shopping Cart</h2>
+                        <h2>تکمیل سفارش</h2>
                     </div>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                         <div class="woocommerce">
 
                             <form  action=""  method="post">
-
+<!--
                                 <div id="payment">
                                         <ul class="payment_methods methods">
                                             <li class="payment_method_bacs">
@@ -46,9 +46,10 @@
                                         </ul>
 
                                     </div>
+                                    -->
                                 {{ form.as_p }}
 
-                                <input type="submit" value="Place order" class="button alt">
+                                <input type="submit" value="ثبت اطلاعات" class="button alt">
                                 {% csrf_token %}
                             </form>
 
@@ -56,14 +57,14 @@
                     </div>
                 </div>
                  <div class="col-md-8">
-                      <h3 id="order_review_heading">Your order</h3>
+                      <h3 id="order_review_heading">سفارش شما</h3>
 
                                 <div id="order_review" style="position: relative;">
                                     <table class="shop_table">
                                         <thead>
                                             <tr>
-                                                <th class="product-name">Product</th>
-                                                <th class="product-total">Total</th>
+                                                <th class="product-name">محصول</th>
+                                                <th class="product-total">مجموع</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -79,23 +80,23 @@
                                         <tfoot>
 
                                             <tr class="cart-subtotal">
-                                                <th>Cart Subtotal</th>
+                                                <th>مجموع سبد خرید</th>
                                                 <td><span class="amount">${{ cart.get_total_price }}</span>
                                                 </td>
                                             </tr>
 
                                             <tr class="shipping">
-                                                <th>Shipping and Handling</th>
+                                                <th>خدمات پشتیبانی</th>
                                                 <td>
 
-                                                    Free Shipping
+                                                    رایگان
 
                                                 </td>
                                             </tr>
 
 
                                             <tr class="order-total">
-                                                <th>Order Total</th>
+                                                <th>مجموع سفارش</th>
                                                 <td><strong><span class="amount">${{ cart.get_total_price }}</span></strong> </td>
                                             </tr>
 

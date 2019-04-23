@@ -105,17 +105,17 @@
                                     <tbody>
                                         <tr class="cart-subtotal">
                                             <th>مجموع سبد خرید</th>
-                                            <td><span class="amount">${{ cart.get_total_price }}</span></td>
+                                            <td><span class="amount">{{ cart.get_total_price }}   تومان </span></td>
                                         </tr>
 
                                         <tr class="shipping">
-                                            <th>هزینه پشتبانی</th>
+                                            <th>هزینه پشتیبانی</th>
                                             <td>رایگان</td>
                                         </tr>
 
                                         <tr class="order-total">
                                             <th>مجموع سفارش</th>
-                                            <td><strong><span class="amount">${{ cart.get_total_price }}</span></strong> </td>
+                                            <td><strong><span class="amount"> {{ cart.get_total_price }}  تومان </span></strong> </td>
                                         </tr>
                                     </tbody>
                                 </table>

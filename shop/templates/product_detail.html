@@ -22,11 +22,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-content-right">
-                        <div class="product-breadcroumb">
-                            <a href="">Home</a>
-                            <a href="">Category Name</a>
-                            <a href="">Sony Smart TV - 2015</a>
-                        </div>
+
                         
                         <div class="row">
                             <div class="col-sm-6">
@@ -47,7 +43,21 @@
                                 <div class="product-inner">
                                     <h2 class="product-name">{{ product.title }}</h2>
                                     <div class="product-inner-price">
-                                        <ins>{{ product.price }}</ins> {% if product.has_discount %}<del>{{ product.super_price }}</del> {% endif %}
+                                        {% if product.has_discount %}
+                                    {% if product.super_price == 0 %}
+                                        <ins>رایگان</ins>
+                                        <del>{{ product.price }}تومان</del>
+                                        {% else %}
+                                    <ins>{{ product.super_price }}تومان</ins>
+                                    <del>{{ product.price }}تومان</del>
+                                        {% endif %}
+                                    {% else %}
+                                    {% if product.price == 0 %}
+                                        <ins>رایگان</ins>
+                                        {% else %}
+                                        <ins>{{ product.price }}تومان</ins>
+                                     {% endif %}
+                                {% endif %}
                                     </div>    
                                     
                                     <!--Add to cart-->
@@ -128,10 +138,21 @@
                                     <h2><a href="{{ related_item.get_absolute_url }}">{{ related_item.title }}</a></h2>
 
                                     <div class="product-carousel-price">
-                                        <ins>{{ related_item.price }}</ins>
                                         {% if related_item.has_discount %}
-                                            <del>{{ related_item.super_price }}</del>
+                                    {% if related_item.super_price == 0 %}
+                                        <ins>رایگان</ins>
+                                        <del>{{ related_item.price }}تومان</del>
+                                        {% else %}
+                                    <ins>{{ related_item.super_price }}تومان</ins>
+                                    <del>{{ related_item.price }}تومان</del>
                                         {% endif %}
+                                    {% else %}
+                                    {% if related_item.price == 0 %}
+                                        <ins>رایگان</ins>
+                                        {% else %}
+                                        <ins>{{ related_item.price }}تومان</ins>
+                                     {% endif %}
+                                {% endif %}
                                     </div> 
                                 </div>
                                 {% endfor %}

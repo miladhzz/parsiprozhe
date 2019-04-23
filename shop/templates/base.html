@@ -48,7 +48,7 @@
                     <ul class="nav navbar-nav" style="float: right">
                         <li>
                             {%if cart|length > 0%}
-                                <a class="cart" href="{% url 'cart_detail' %}">سبد خريد - <span class="cart-amunt">${{ cart.get_total_price }}</span> <i class="fa fa-shopping-cart"></i>
+                                <a class="cart" href="{% url 'cart_detail' %}">سبد خريد - <span class="cart-amunt"> {{ cart.get_total_price }}&nbsp; تومان </span> &nbsp; <i class="fa fa-shopping-cart"></i>
                                 <span class="product-count">{{ cart|length }}</span></a>
                             {% else %}
                                 <a class="cart" href="#">سبد خريد خالي است!</a>
