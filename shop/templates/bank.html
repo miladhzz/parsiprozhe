@@ -7,7 +7,34 @@
     متشکریم!
 </h1>
 <h2>
-شماره سفارش شما {{ order.random_order_id }}
+شماره سفارش شما {{ order_items.first.order.random_order_id }}
 </h2>
-
+<hr />
+    <h4>شما می توانید فایل های زیر را دانلود کنید:</h4>
+    <table class="shop_table">
+                                        <thead>
+                                            <tr>
+                                                <th class="product-name">محصول</th>
+                                                <th class="product-total">لینک های دانلود</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for item in order_items %}
+                                                <tr class="cart_item">
+                                                    <td class="product-name">
+                                                        {{ item.product.title }} <strong class="product-quantity">× {{ item.count }}</strong> </td>
+                                                    <td class="product-total">
+                                                        {% if item.product.files.count > 0 %}
+                                                            {% for file in item.product.files.all %}
+                                                                    <a href="{{ file.file.url }}">{{ file.title }}</a>
+                                                                <br />
+                                                            {% endfor %}
+                                                        {% else %}
+                                                            <span>فایل موجود نیست!</span>
+                                                        {% endif %}
+                                                    </td>
+                                                </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
 {% endblock %}

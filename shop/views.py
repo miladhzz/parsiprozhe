@@ -78,8 +78,8 @@ def checkout(request):
 
 
 def to_bank(request, order_id):
-    order = get_object_or_404(Order, random_order_id=order_id)
-    return render(request, 'bank.html', {'order': order})
+    order_items = OrderItem.objects.filter(order__random_order_id=order_id)
+    return render(request, 'bank.html', {'order_items': order_items})
 
 
 @require_POST

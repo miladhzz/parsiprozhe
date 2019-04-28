@@ -50,7 +50,8 @@ class ContactForm(forms.ModelForm):
             'email': 'ایمیل',
             'message': 'متن پیام'
         }
-            
+
+
 class RegisterForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super(RegisterForm, self).__init__(*args, **kwargs)
