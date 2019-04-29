@@ -28,12 +28,12 @@
                             <div class="col-sm-6">
                                 <div class="product-images">
                                     <div class="product-main-img">
-                                        <img src="{{ product.pic.url }}" alt="{{ product.title }}">
+                                        <img src="{{ product.pic.url }}" alt="{{ product.title }}" height="300">
                                     </div>
                                     
                                     <div class="product-gallery">
                                         {% for  gallery in product.image_gallery.all%}
-                                        <img src="{{ gallery.pic.url }}" alt="{{ gallery.title }}">
+                                        <img src="{{ gallery.pic.url }}" alt="{{ gallery.title }}"  height="300">
                                         {% endfor %}
                                     </div>
                                 </div>
