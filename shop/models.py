@@ -131,7 +131,11 @@ class Product(models.Model):
     files = models.ManyToManyField(FileGallery, blank=True)
     count_of_download = models.PositiveIntegerField(null=True)
     related_product = models.ManyToManyField('self', blank=True,
+
                                              verbose_name="Related Product")
+
+    class Meta:
+        ordering = ('-id',)
 
     def __str__(self):
         return self.title
