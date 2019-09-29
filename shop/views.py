@@ -8,6 +8,8 @@ from .forms import CartAddProductForm, CartUpdateProductForm, OrderCheckoutForm,
 from .cart import Cart
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from zeep import Client
+from django.http import HttpResponse
 
 
 class FormMixin(ContextMixin):
@@ -77,9 +79,39 @@ def checkout(request):
                                              'form': form})
 
 
+MERCHANT = ''
+client = Client('https://www.zarinpal.com/pg/services/WebGate/wsdl')
+CallbackURL = 'http://127.0.0.1:8000/callback/'
+
+
 def to_bank(request, order_id):
+    description = "تست جنگو"  # Required
+    email = 'miladhzz@gmail.com'  # Optional
+    mobile = '09384677005'  # Optional
     order_items = OrderItem.objects.filter(order__random_order_id=order_id)
-    return render(request, 'bank.html', {'order_items': order_items})
+    amount = 0
+    for item in order_items:
+        amount += item.price
+    result = client.service.PaymentRequest(MERCHANT, amount, description, email, mobile, CallbackURL)
+    if result.Status == 100 and len(result.Authority) == 36:
+        return redirect('https://www.zarinpal.com/pg/StartPay/' + str(result.Authority))
+    else:
+        return HttpResponse('Error code: ' + int(str(result.Status)))
+
+
+def callback(request):
+    if request.GET.get('Status') == 'OK':
+        result = client.service.PaymentVerification(MERCHANT, request.GET['Authority'], 1000)
+        if result.Status == 100:
+            # return HttpResponse('Transaction success.\nRefID: ' + str(result.RefID))
+            order_items = OrderItem.objects.filter(order__random_order_id=1)
+            return render(request, 'bank.html', {'order_items': order_items})
+        elif result.Status == 101:
+            return HttpResponse('Transaction submitted : ' + str(result.Status))
+        else:
+            return HttpResponse('Transaction failed.\nStatus: ' + str(result.Status))
+    else:
+        return HttpResponse('Transaction failed or canceled by user')
 
 
 @require_POST
