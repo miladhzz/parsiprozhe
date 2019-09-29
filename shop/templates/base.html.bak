@@ -59,8 +59,8 @@
                         {% if request.user.is_authenticated %}
                             <li><a href="{% url 'logout' %}">خروج</a></li>
                         {% else %}
-                            <li><a href="#">ثبت نام</a></li>
-                            <li><a href="#">ورود</a></li>
+                            <li><a href="{% url 'register' %}">ثبت نام</a></li>
+                            <li><a href="{% url 'login' %}">ورود</a></li>
                         {% endif %}
                         <li><a href="{% url 'product' %}">فروشگاه</a></li>
                         <li><a href="{% url 'home' %}">خانه</a></li>
@@ -81,7 +81,7 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-about-us">
                         <h2>پارسی پروژه</h2>
-                        <p>پارسی پروژه همیشه حق را به کاربران می دهد. هرگونه مشکلی با محصول داشته باشید ، تمامی هزینه ی شما عودت خواهد شد.</p>
+                        <p>پارسی پروژه همیشه به حق را به کاربران می دهد. هرگونه مشکلی با محصول داشته باشید ، تمامی هزینه ی شما عودت خواهد شد.</p>
                         <div class="footer-social">
                             <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
                             <a href="#" target="_blank"><i class="fa fa-twitter"></i></a>

@@ -25,10 +25,6 @@ SECRET_KEY = '1h!twe4zr8-&&91@u_%oq^q&xey&579k)-7v!xx8o3yu$bpj(y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-DEFAULT_CHARSET = 'utf-8'
-
-FILE_UPLOAD_MAX_MEMORY_SIZE = 15242880
-
 ALLOWED_HOSTS = []
 
 
@@ -119,11 +115,11 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Tehran'
 
-USE_I18N = False
+USE_I18N = True
 
-USE_L10N = False
+USE_L10N = True
 
-USE_TZ = False
+USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
@@ -134,9 +130,6 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
-STATICFILES_DIRS = [ BASE_DIR+"/assets", ]
-STATIC_ROOT  ='/home/parsipro/public_html/static'
-MEDIA_ROOT  ='/home/parsipro/public_html/media'
 
 CART_SESSION_ID = 'cart'
 '''
