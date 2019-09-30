@@ -179,12 +179,14 @@ class Order(models.Model):
         choices=Order_statuses,
         default=CHECKING,
     )
-    payment_tool = models.CharField(max_length=100)
+    authority = models.CharField(max_length=100, blank=True)
+    refId = models.CharField(max_length=100, blank=True)
     order_date = models.DateTimeField(auto_now_add=True)
     order_update_date = models.DateTimeField(blank=True, null=True)
     count_of_allow_download = models.IntegerField(default=10)
     date_of_expire_download = models.DateTimeField(blank=True, null=True)
     random_order_id = models.IntegerField(default=helper.random_int, unique=True)
+    amount = models.IntegerField(default=0, blank=True)
 
     def __str__(self):
         return str(self.random_order_id)

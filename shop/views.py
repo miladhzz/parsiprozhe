@@ -10,6 +10,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from zeep import Client
 from django.http import HttpResponse
+from parsiprozhe.settings import MERCHANT
 
 
 class FormMixin(ContextMixin):
@@ -79,39 +80,53 @@ def checkout(request):
                                              'form': form})
 
 
-MERCHANT = ''
 client = Client('https://www.zarinpal.com/pg/services/WebGate/wsdl')
 CallbackURL = 'http://127.0.0.1:8000/callback/'
 
 
 def to_bank(request, order_id):
-    description = "تست جنگو"  # Required
-    email = 'miladhzz@gmail.com'  # Optional
-    mobile = '09384677005'  # Optional
-    order_items = OrderItem.objects.filter(order__random_order_id=order_id)
+    order = get_object_or_404(Order, random_order_id=order_id)
+    description = "خرید فایل از پارسی پروژه"  # Required
+    email = order.email
+    mobile = order.mobile
+    order_items = OrderItem.objects.filter(order=order)
     amount = 0
     for item in order_items:
         amount += item.price
+    if amount == 0:
+        return render(request, 'bank.html', {'order_items': order_items})
+    order.amount = amount
+    order.save()
     result = client.service.PaymentRequest(MERCHANT, amount, description, email, mobile, CallbackURL)
     if result.Status == 100 and len(result.Authority) == 36:
-        return redirect('https://www.zarinpal.com/pg/StartPay/' + str(result.Authority))
+        order.authority = int(result.Authority)
+        order.save()
+        return redirect('https://www.zarinpal.com/pg/StartPay/' + str(int(result.Authority)))
     else:
-        return HttpResponse('Error code: ' + int(str(result.Status)))
+        return HttpResponse('Error code: ' + str(result.Status))
 
 
 def callback(request):
     if request.GET.get('Status') == 'OK':
-        result = client.service.PaymentVerification(MERCHANT, request.GET['Authority'], 1000)
+        authority = int(request.GET['Authority'])
+        order = get_object_or_404(Order, authority=authority)
+        result = client.service.PaymentVerification(MERCHANT, authority, order.amount)
         if result.Status == 100:
-            # return HttpResponse('Transaction success.\nRefID: ' + str(result.RefID))
-            order_items = OrderItem.objects.filter(order__random_order_id=1)
-            return render(request, 'bank.html', {'order_items': order_items})
+            order_items = OrderItem.objects.filter(order=order)
+            order.order_status = 1  # Complete
+            order.refId = result.RefID
+            order.save()
+            return render(request, 'callback.html', {'order_items': order_items,
+                                                     'refId': order.refId})
         elif result.Status == 101:
-            return HttpResponse('Transaction submitted : ' + str(result.Status))
+            order_items = OrderItem.objects.filter(order=order)
+            return render(request, 'callback.html', {'order_items': order_items,
+                                                     'refId': order.refId})
         else:
-            return HttpResponse('Transaction failed.\nStatus: ' + str(result.Status))
+            return HttpResponse('تراکنش ناموفق.\nStatus: ' + str(result.Status) +
+                                '<a href="http://parsiprozhe.ir">بازگشت</a>')
     else:
-        return HttpResponse('Transaction failed or canceled by user')
+        return HttpResponse('پرداخت توسط کاربر لغو شد' + '<a href="http://parsiprozhe.ir">بازگشت</a>')
 
 
 @require_POST

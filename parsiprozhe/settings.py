@@ -139,6 +139,8 @@ STATIC_ROOT  ='/home/parsipro/public_html/static'
 MEDIA_ROOT  ='/home/parsipro/public_html/media'
 
 CART_SESSION_ID = 'cart'
+
+MERCHANT = ''
 '''
 INTERNAL_IPS = ['127.0.0.1']
 
