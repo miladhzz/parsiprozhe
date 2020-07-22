@@ -40,6 +40,8 @@ class OrderCheckoutForm(forms.ModelForm):
         }
 
 
+attr = {'class': 'form-control'}
+
 class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
@@ -49,6 +51,12 @@ class ContactForm(forms.ModelForm):
             'mobile': 'موبایل',
             'email': 'ایمیل',
             'message': 'متن پیام'
+        }
+        widgets = {
+            'name': forms.TextInput(attrs=attr),
+            'mobile': forms.TextInput(attrs=attr),
+            'email': forms.EmailInput(attrs=attr),
+            'message': forms.Textarea(attrs=attr)
         }
 
 

@@ -13,10 +13,25 @@
             </div>
         </div>
     </div>
-<form action="." method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="ارسال">
-</form>
-
+    <div class="container">
+        <div class="row contact-form">
+        {% if new_contact %}
+            <h3 class="new-contact">پیام شما با موفقیت ثبت شد، در اولین فرصت بررسی میکنیم.</h3>
+        {% else %}
+            <h2>جهت ارتباط با ما از فرم زیر استفاده کنید:</h2>
+            {{ form.non_field_errors }}
+            <form action="." method="post">
+                {% for field in form %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {{ field.errors }}
+                    </div>
+                {% endfor %}
+                {% csrf_token %}
+                <input type="submit" value="ارسال">
+            </form>
+        {% endif %}                  
+        </div>
+    </div>
 {% endblock %}
