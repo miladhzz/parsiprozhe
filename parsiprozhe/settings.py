@@ -104,13 +104,17 @@ USE_TZ = False
 
 
 STATIC_URL = '/static/'
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 MEDIA_URL = '/media/'
-STATICFILES_DIRS = [ BASE_DIR+"/assets", ]
+
 STATIC_ROOT  ='/home/parsipro/public_html/static'
 MEDIA_ROOT  ='/home/parsipro/public_html/media'
+
+STATICFILES_DIRS = [     
+    BASE_DIR + "/assets", 
+    ]
+
+if DEBUG:
+    STATICFILES_DIRS.append(os.path.join(BASE_DIR, 'static')) 
 
 CART_SESSION_ID = 'cart'
 
