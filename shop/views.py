@@ -4,7 +4,7 @@ from django.utils.encoding import uri_to_iri
 from .models import Product, OrderItem, Order
 from django.views.generic.base import ContextMixin
 from django.views.decorators.http import require_POST
-from .forms import CartAddProductForm, CartUpdateProductForm, OrderCheckoutForm, ContactForm, RegisterForm
+from . import forms
 from .cart import Cart
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -16,7 +16,7 @@ from parsiprozhe.settings import MERCHANT
 class FormMixin(ContextMixin):
     def get_context_data(self, *args, **kwargs):
         ctx = super(FormMixin, self).get_context_data(**kwargs)
-        ctx['cart_product_from'] = CartAddProductForm()
+        ctx['cart_product_from'] = forms.CartAddProductForm()
         return ctx
 
 
@@ -50,8 +50,24 @@ class ProductList(FormMixin, ListView):
 
 def product_detail(request, slug):
     product = get_object_or_404(Product, slug=uri_to_iri(slug))
+    comments = product.comment_set.filter(is_active=True)
+
+    new_comment = None
+    if request.method == 'POST':
+        comment_form = forms.CommentForm(data=request.POST)
+
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.product = product
+            new_comment.save()
+    else:
+        comment_form = forms.CommentForm()
+
     return render(request, 'product_detail.html', {'product': product,
-                                                   'cart_product_from':CartAddProductForm() })
+                                                   'cart_product_from': forms.CartAddProductForm(),
+                                                   'comments': comments,
+                                                   'comment_form': comment_form,
+                                                   'new_comment': new_comment })
 
 
 class Home(TopSelMixin, RecentlyMixin, LatestMixin, FormMixin, ListView):
@@ -62,7 +78,7 @@ class Home(TopSelMixin, RecentlyMixin, LatestMixin, FormMixin, ListView):
 def checkout(request):
     cart = Cart(request)
     if request.method == 'POST':
-        form = OrderCheckoutForm(request.POST)
+        form = forms.OrderCheckoutForm(request.POST)
         if form.is_valid():
             order = form.save()
             for item in cart:
@@ -75,7 +91,7 @@ def checkout(request):
             return redirect('to_bank', order_id=order.random_order_id)
 
     else:
-        form = OrderCheckoutForm()
+        form = forms.OrderCheckoutForm()
     return render(request, 'checkout.html', {'cart': cart,
                                              'form': form})
 
@@ -133,7 +149,7 @@ def callback(request):
 def cart_add(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
-    form = CartAddProductForm(request.POST)
+    form = forms.CartAddProductForm(request.POST)
     if form.is_valid():
         cd = form.cleaned_data
         cart.add(product=product,
@@ -146,7 +162,7 @@ def cart_add(request, product_id):
 def cart_update(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
-    form = CartUpdateProductForm(request.POST)
+    form = forms.CartUpdateProductForm(request.POST)
     if form.is_valid():
         cd = form.cleaned_data
         cart.add(product=product,
@@ -165,7 +181,7 @@ def cart_remove(request, product_id):
 def cart_detail(request):
     cart = Cart(request)
     for item in cart:
-        item['update_count_from'] = CartUpdateProductForm(initial={'count': item['count'],
+        item['update_count_from'] = forms.CartUpdateProductForm(initial={'count': item['count'],
                                                                    'update': True})
     return render(request, 'cart.html', {'cart': cart})
 
@@ -181,13 +197,13 @@ class CategoryProductList(ListView):
 
 class ContactMe(CreateView):
     template_name = 'contact.html'
-    form_class = ContactForm
+    form_class = forms.ContactForm
     success_url = '.'
 
 
 class SignUp(CreateView):
     template_name = 'registration/register.html'
-    form_class = RegisterForm
+    form_class = forms.RegisterForm
     success_url = '../login'
 
 

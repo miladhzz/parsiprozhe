@@ -247,3 +247,20 @@ class Contact(models.Model):
 
     # def get_absolute_url(self):
     #    return reverse('contact')
+
+
+class Comment(models.Model):
+    full_name = models.CharField(max_length=200)
+    email = models.EmailField(blank=True, null=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    comment = models.TextField(max_length=500)
+    reply = models.TextField(max_length=500, blank=True, null=True)
+    is_active = models.BooleanField(default=False)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_reply = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return "{} from {}".format(self.comment[0:50], self.product)
+    
+
+

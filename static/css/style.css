@@ -1233,3 +1233,20 @@ div.zarinpal-trust{
 div.zarinpal-trust img{
     width: 100px;
 }
+
+h2.new-commnet{
+    color: #03d203;
+}
+
+div.comment div.name{
+    background-color: #d8d8d8;
+    margin-top: 10px;
+}
+div.comment div.content{
+    padding: 5px;
+}
+div.comment div.content div.reply{
+    border: 1px solid #d4d4d4;
+    margin: 5px;
+    padding: 5px;
+}
