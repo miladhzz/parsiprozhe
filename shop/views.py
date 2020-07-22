@@ -97,7 +97,7 @@ def checkout(request):
 
 
 client = Client('https://www.zarinpal.com/pg/services/WebGate/wsdl')
-CallbackURL = 'http://127.0.0.1:8000/callback/'
+CallbackURL = 'http://parsiprozhe.ir/callback/'
 
 
 def to_bank(request, order_id):
