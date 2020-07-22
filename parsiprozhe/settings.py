@@ -4,7 +4,7 @@ import json
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-DEBUG = True
+DEBUG = False
 
 secret = json.load(open(os.path.join(BASE_DIR, 'secret.json')))
 secret_dev = json.load(open(os.path.join(BASE_DIR, 'secret_dev.json')))
