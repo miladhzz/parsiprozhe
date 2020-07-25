@@ -1,10 +1,7 @@
 
-*.PNG
 .idea/workspace.xml
-*.jpg
-*.gif
 .idea/workspace.xml
-media/media/upload/files/Daberestan.rar
-media/media/upload/files/Havashnasi.rar
+media
 .idea/workspace.xml
 secret.json
+*.pyc

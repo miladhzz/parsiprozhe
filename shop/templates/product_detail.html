@@ -64,7 +64,7 @@
                                     <form action="{% url 'cart_add' product.id %}" method="post">
                                         {{ cart_product_from }}
                                         {% csrf_token %}
-                                        <input type="submit" value="افزودن به سبد خريد"/>
+                                        <input type="submit" class="btn btn-primary" value="افزودن به سبد خريد"/>
                                     </form>
                                     
                                     <div class="product-inner-category">
@@ -80,32 +80,48 @@
                                     
                                     <div role="tabpanel">
                                         <ul class="product-tab" role="tablist">
-                                            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">توضيحات</a></li>
-                                            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">نظرات کاربران</a></li>
+                                            <li role="presentation" class="{% if new_comment == None %} active {% endif %}"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">توضيحات</a></li>
+                                            <li role="presentation" class="{% if new_comment %} active {% endif %}"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">نظرات کاربران</a></li>
                                         </ul>
                                         <div class="tab-content">
-                                            <div role="tabpanel" class="tab-pane fade in active" id="home">
+                                            <div role="tabpanel" class="tab-pane fade {% if new_comment == None %} active in {% endif %}" id="home">
                                                 <h2>توضيحات محصول</h2>
                                                 {{ product.content|safe }}
                                             </div>
-                                            <div role="tabpanel" class="tab-pane fade" id="profile">
-                                                <h2>Reviews</h2>
+                                            <div role="tabpanel" class="tab-pane fade {% if new_comment %} active in {% endif %}" id="profile">
+                                                <h2>نظرات کاربران</h2>
                                                 <div class="submit-review">
-                                                    <p><label for="name">Name</label> <input name="name" type="text"></p>
-                                                    <p><label for="email">Email</label> <input name="email" type="email"></p>
-                                                    <div class="rating-chooser">
-                                                        <p>Your rating</p>
 
-                                                        <div class="rating-wrap-post">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
+                                                <div>
+                                                    {% for comment in comments %}
+                                                        <div class="comment">
+                                                            <div class="name"> {{ comment.full_name }}</div>
+                                                            <div class="content"> 
+                                                                {{ comment.comment }}
+                                                                {% if comment.reply %}
+                                                                    <div class="reply">
+                                                                    <strong>پاسخ ادمین:</strong>
+                                                                    <br />
+                                                                    <span>{{ comment.reply }}</span>
+                                                                    </div>
+                                                                    
+                                                                {% endif %}
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <p><label for="review">Your review</label> <textarea name="review" id="" cols="30" rows="10"></textarea></p>
-                                                    <p><input type="submit" value="Submit"></p>
+                                                    {% endfor %}
+                                                </div>
+                                                <hr />
+                                                
+                                                {% if new_comment %}
+                                                    <h2 class="new-commnet">نظر شما با موفقیت ثبت شد، در اولین فرصت بررسی میکنیم.<h2/>
+                                                {% else %}
+                                                    <h2>سوال یا نظرتان را بنویسید:</h2>
+                                                    <form action="." method="post">
+                                                        {{ comment_form }}
+                                                        {% csrf_token %}
+                                                        <input type="submit" value="ثبت نظر" class="btn btn-primary" />
+                                                    </form>
+                                                {% endif %}                                                                                                
                                                 </div>
                                             </div>
                                         </div>

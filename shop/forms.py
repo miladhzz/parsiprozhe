@@ -1,5 +1,5 @@
 from django import forms
-from .models import Order, Contact
+from .models import Order, Contact, Comment
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -89,3 +89,14 @@ class RegisterForm(UserCreationForm):
                 'max_length': "This mmmmm writer's name is too long.",
             },
         }'''
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['full_name','email', 'comment']
+        labels = { 
+            'full_name': 'نام',            
+            'email': 'ایمیل',
+            'comment': 'متن پیام'
+        }
