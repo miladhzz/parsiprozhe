@@ -107,8 +107,8 @@ USE_TZ = False
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-STATIC_ROOT  ='/home/fahandej/public_html/parsiprozhe/static'
-MEDIA_ROOT  ='/home/fahandej/public_html/parsiprozhe/media'
+STATIC_ROOT  ='/home/fahandej/parsiprozhe.ir/static'
+MEDIA_ROOT  ='/home/fahandej/parsiprozhe.ir/media'
 
 STATICFILES_DIRS = [
     BASE_DIR + "/assets",
