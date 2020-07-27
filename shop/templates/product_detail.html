@@ -107,12 +107,14 @@
                                         {% if new_comment %}
                                             <h4 class="new-commnet">نظر شما با موفقیت ثبت شد، در اولین فرصت بررسی میکنیم.</h4>
                                         {% else %}
+                                            {% if product.is_active_comment %}
                                             <h4>سوال یا نظرتان را بنویسید:</h4>
                                             <form action="." method="post">
                                                 {{ comment_form }}
                                                 {% csrf_token %}
                                                 <input type="submit" value="ثبت نظر" class="btn btn-primary" />
                                             </form>
+                                            {% endif %}
                                         {% endif %}
                                       </div>
                                 </div>
