@@ -107,15 +107,15 @@ USE_TZ = False
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-STATIC_ROOT  ='/home/parsipro/public_html/static'
-MEDIA_ROOT  ='/home/parsipro/public_html/media'
+STATIC_ROOT  ='/home/fahandej/public_html/parsiprozhe/static'
+MEDIA_ROOT  ='/home/fahandej/public_html/parsiprozhe/media'
 
-STATICFILES_DIRS = [     
-    BASE_DIR + "/assets", 
+STATICFILES_DIRS = [
+    BASE_DIR + "/assets",
     ]
 
 if DEBUG:
-    STATICFILES_DIRS.append(os.path.join(BASE_DIR, 'static')) 
+    STATICFILES_DIRS.append(os.path.join(BASE_DIR, 'static'))
 
 CART_SESSION_ID = 'cart'
 
@@ -135,4 +135,3 @@ DEBUG_TOOLBAR_CONFIG = {
     'SHOW_TOOLBAR_CALLBACK': lambda x: True
 }
 '''
-

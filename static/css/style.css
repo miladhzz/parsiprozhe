@@ -855,7 +855,14 @@ input[type="submit"]:hover, button[type=submit]:hover {background-color: #222}
     display: none;
 }
 .product-main-img {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+		margin-bottom: 10px;
+		border: 1px solid #efefef;
+		padding: 10px;
+		text-align: center;
+}
+.product-main-img .image-title {
+	margin-top: 10px;
 }
 .product-gallery {
     margin-bottom: 25px;

@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %} پارسی پروژه - جزئیات محصول{% endblock %}
 {% block content %}
-    
+
     <div class="product-big-title-area">
         <div class="container">
             <div class="row">
@@ -14,8 +14,8 @@
             </div>
         </div>
     </div>
-    
-    
+
+
     <div class="single-product-area">
         <div class="zigzag-bottom"></div>
         <div class="container">
@@ -23,22 +23,23 @@
                 <div class="col-md-12">
                     <div class="product-content-right">
 
-                        
+
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="product-images">
                                     <div class="product-main-img">
-                                        <img src="{{ product.pic.url }}" alt="{{ product.title }}" height="300">
+                                        <img src="{{ product.pic.url }}" alt="{{ product.title }}" width="500">
+                                        <h5 class="image-title">{{ product.title }}</h5>
                                     </div>
-                                    
-                                    <div class="product-gallery">
-                                        {% for  gallery in product.image_gallery.all%}
-                                        <img src="{{ gallery.pic.url }}" alt="{{ gallery.title }}"  height="300">
-                                        {% endfor %}
+                                    {% for  gallery in product.image_gallery.all%}
+                                    <div class="product-main-img">
+                                        <img src="{{ gallery.pic.url }}" alt="{{ product.title }}" width="500">
+                                        <h5 class="image-title">{{ product.title }}</h5>
                                     </div>
+                                    {% endfor %}
                                 </div>
                             </div>
-                            
+
                             <div class="col-sm-6">
                                 <div class="product-inner">
                                     <h2 class="product-name">{{ product.title }}</h2>
@@ -58,15 +59,15 @@
                                         <ins>{{ product.price }}تومان</ins>
                                      {% endif %}
                                 {% endif %}
-                                    </div>    
-                                    
+                                    </div>
+
                                     <!--Add to cart-->
                                     <form action="{% url 'cart_add' product.id %}" method="post">
                                         {{ cart_product_from }}
                                         {% csrf_token %}
                                         <input type="submit" class="btn btn-primary" value="افزودن به سبد خريد"/>
                                     </form>
-                                    
+
                                     <div class="product-inner-category">
                                         <p>دسته بندي:
                                             {% for category in product.category.all %}
@@ -76,8 +77,8 @@
                                             {% for tag in product.tags.all %}
                                             <a href="">{{ tag.title }}</a>,
                                             {% endfor %}
-                                    </div> 
-                                    
+                                    </div>
+
                                     <div role="tabpanel">
                                         <ul class="product-tab" role="tablist">
                                             <li role="presentation" class="{% if new_comment == None %} active {% endif %}"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">توضيحات</a></li>
@@ -96,7 +97,7 @@
                                                     {% for comment in comments %}
                                                         <div class="comment">
                                                             <div class="name"> {{ comment.full_name }}</div>
-                                                            <div class="content"> 
+                                                            <div class="content">
                                                                 {{ comment.comment }}
                                                                 {% if comment.reply %}
                                                                     <div class="reply">
@@ -104,14 +105,14 @@
                                                                     <br />
                                                                     <span>{{ comment.reply }}</span>
                                                                     </div>
-                                                                    
+
                                                                 {% endif %}
                                                             </div>
                                                         </div>
                                                     {% endfor %}
                                                 </div>
                                                 <hr />
-                                                
+
                                                 {% if new_comment %}
                                                     <h2 class="new-commnet">نظر شما با موفقیت ثبت شد، در اولین فرصت بررسی میکنیم.<h2/>
                                                 {% else %}
@@ -121,17 +122,17 @@
                                                         {% csrf_token %}
                                                         <input type="submit" value="ثبت نظر" class="btn btn-primary" />
                                                     </form>
-                                                {% endif %}                                                                                                
+                                                {% endif %}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
-                        
-                        
+
+
                         <div class="related-products-wrapper" style="direction: ltr;">
                             <h2 class="related-products-title" style="text-align: center;">برخي محصولات مرتبط</h2>
                             <div class="related-products-carousel">
@@ -169,12 +170,12 @@
                                         <ins>{{ related_item.price }}تومان</ins>
                                      {% endif %}
                                 {% endif %}
-                                    </div> 
+                                    </div>
                                 </div>
                                 {% endfor %}
                             </div>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
             </div>
         </div>
