@@ -908,6 +908,7 @@ form.cart {
 }
 .product-inner-category {
     margin-bottom: 30px;
+		margin-top: 30px;
 }
 .product-tab {
     border-bottom: 1px solid #ddd;
@@ -1241,7 +1242,7 @@ div.zarinpal-trust img{
     width: 100px;
 }
 
-h2.new-commnet{
+h4.new-commnet{
     color: #03d203;
 }
 
