@@ -1268,3 +1268,6 @@ div.contact-form{
     padding: 10px;
     min-height: 200px;
 }
+div.product-content{
+	line-height: 30px;
+}

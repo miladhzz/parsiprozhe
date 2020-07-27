@@ -79,7 +79,9 @@
                                             {% endfor %}
                                     </div>
                                     <h2>توضيحات محصول</h2>
-                                    {{ product.content|safe }}
+                                    <div class="product-content">
+                                      {{ product.content|safe }}
+                                    </div>
 
                                     <hr />
                                     <h4>نظرات کاربران</h4>
