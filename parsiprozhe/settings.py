@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 'debug_toolbar',
     'shop',
-    'ckeditor'
+    'ckeditor',
+    'logger',
 ]
 
 MIDDLEWARE = [

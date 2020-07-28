@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 from zeep import Client
 from django.http import HttpResponse
 from parsiprozhe.settings import MERCHANT
+from logger import statistic
 
 
 class FormMixin(ContextMixin):
@@ -64,6 +65,7 @@ def product_detail(request, slug):
     else:
         comment_form = forms.CommentForm()
 
+    statistic.log(request)
     return render(request, 'product_detail.html', {'product': product,
                                                    'cart_product_from': forms.CartAddProductForm(),
                                                    'comments': comments,
@@ -124,6 +126,7 @@ def to_bank(request, order_id):
 
 
 def callback(request):
+    statistic.log(request)
     if request.GET.get('Status') == 'OK':
         authority = int(request.GET['Authority'])
         order = get_object_or_404(Order, authority=authority)
@@ -225,5 +228,3 @@ class SignUp(CreateView):
 def logout_user(request):
     logout(request)
     return render(request, 'registration/logout.html')
-
-
