@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 PRODUCT_COUNT_CHOICES = [(i, str(i)) for i in range(1, 21)]
-
+attr = {'class': 'form-control'}
 
 class CartAddProductForm(forms.Form):
     count = forms.TypedChoiceField(choices=PRODUCT_COUNT_CHOICES,
@@ -31,22 +31,26 @@ class OrderCheckoutForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ('name', 'family', 'email', 'mobile', 'is_accept_agreement')
-        labels = { 
+        labels = {
             'name': 'نام',
             'family': 'نام خانوادگی',
             'mobile': 'موبایل',
             'email': 'ایمیل',
             'is_accept_agreement': 'با قوانین پارسی پروژه موافقم'
         }
+        widgets = {
+            'name': forms.TextInput(attrs=attr),
+            'family': forms.TextInput(attrs=attr),
+            'mobile': forms.TextInput(attrs=attr),
+            'email': forms.EmailInput(attrs=attr)
+        }
 
-
-attr = {'class': 'form-control'}
 
 class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
         fields = ['name', 'mobile', 'email', 'message']
-        labels = { 
+        labels = {
             'name': 'نام',
             'mobile': 'موبایل',
             'email': 'ایمیل',
@@ -103,8 +107,8 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['full_name','email', 'comment']
-        labels = { 
-            'full_name': 'نام',            
+        labels = {
+            'full_name': 'نام',
             'email': 'ایمیل',
             'comment': 'متن پیام'
         }
