@@ -243,7 +243,7 @@ class Contact(models.Model):
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.email
+        return "{} : {}".format(self.email, self.message[0:50])
 
     # def get_absolute_url(self):
     #    return reverse('contact')
@@ -261,6 +261,3 @@ class Comment(models.Model):
 
     def __str__(self):
         return "{} from {}".format(self.comment[0:50], self.product)
-    
-
-
