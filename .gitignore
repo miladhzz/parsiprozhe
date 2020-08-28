@@ -5,3 +5,4 @@ media
 .idea/workspace.xml
 secret.json
 *.pyc
+*.htaccess
