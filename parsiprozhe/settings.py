@@ -4,7 +4,7 @@ import json
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-DEBUG = False
+DEBUG = True
 
 secret = json.load(open(os.path.join(BASE_DIR, 'secret.json')))
 secret_dev = json.load(open(os.path.join(BASE_DIR, 'secret_dev.json')))
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'shop',
     'ckeditor',
     'logger',
+    'contact'
 ]
 
 MIDDLEWARE = [

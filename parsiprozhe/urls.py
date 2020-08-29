@@ -19,5 +19,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('loginmodir/', admin.site.urls),
-    path('', include('shop.urls'))
+    path('', include('shop.urls')),
+    path('', include('contact.urls'))
 ]

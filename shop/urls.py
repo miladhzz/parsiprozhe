@@ -22,7 +22,6 @@ urlpatterns = [
     path('to_bank/<int:order_id>', views.to_bank, name='to_bank'),
     path('callback/', views.callback, name='callback'),
     path('category/<slug>', views.CategoryProductList.as_view(), name='category'),
-    path('contact/', views.ContactMe.as_view(), name='contact'),
     path('registration/register/', views.SignUp.as_view(), name='register'),
     path('registration/login/', auth_views.LoginView.as_view(), name="login"),
     path('registration/logout/', views.logout_user, name="logout"),

@@ -1,10 +1,11 @@
 from django import forms
-from .models import Order, Contact, Comment
+from .models import Order, Comment
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 PRODUCT_COUNT_CHOICES = [(i, str(i)) for i in range(1, 21)]
 attr = {'class': 'form-control'}
+
 
 class CartAddProductForm(forms.Form):
     count = forms.TypedChoiceField(choices=PRODUCT_COUNT_CHOICES,
@@ -43,24 +44,6 @@ class OrderCheckoutForm(forms.ModelForm):
             'family': forms.TextInput(attrs=attr),
             'mobile': forms.TextInput(attrs=attr),
             'email': forms.EmailInput(attrs=attr)
-        }
-
-
-class ContactForm(forms.ModelForm):
-    class Meta:
-        model = Contact
-        fields = ['name', 'mobile', 'email', 'message']
-        labels = {
-            'name': 'نام',
-            'mobile': 'موبایل',
-            'email': 'ایمیل',
-            'message': 'متن پیام'
-        }
-        widgets = {
-            'name': forms.TextInput(attrs=attr),
-            'mobile': forms.TextInput(attrs=attr),
-            'email': forms.EmailInput(attrs=attr),
-            'message': forms.Textarea(attrs=attr)
         }
 
 

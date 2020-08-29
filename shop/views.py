@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, CreateView
-from django.views import View
 from django.utils.encoding import uri_to_iri
 from .models import Product, OrderItem, Order
 from django.views.generic.base import ContextMixin
@@ -197,25 +196,6 @@ class CategoryProductList(ListView):
     def get_queryset(self):
         queryset = Product.objects.filter()
         return queryset
-
-
-class ContactMe(View):
-    template_name = 'contact.html'
-    form_class = forms.ContactForm
-    initial = {'key': 'value'}
-    # success_url = '.'
-
-    def get(self, request, *args, **kwargs):
-        form = self.form_class(initial=self.initial)
-        return render(request, self.template_name, {'form': form})
-
-    new_contact = None
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            new_contact = form.save()
-            return render(request, self.template_name , {'form':form,
-                                                         'new_contact': new_contact })
 
 
 class SignUp(CreateView):

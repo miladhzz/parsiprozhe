@@ -6,3 +6,6 @@ media
 secret.json
 *.pyc
 *.htaccess
+venv
+*.iml
+*.xml
