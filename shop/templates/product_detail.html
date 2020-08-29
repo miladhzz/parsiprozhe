@@ -73,14 +73,18 @@
                                     </form>
 
                                     <div class="product-inner-category">
+                                    {% if product.category.all %}
                                         <p>دسته بندي:
                                             {% for category in product.category.all %}
                                                  <a href="{% url 'category' category.slug  %}">{{ category.title }}</a>
                                             {% endfor %}
+                                    {% endif %}
+                                    {% if product.tags.all %}
                                         . تگ ها:
                                             {% for tag in product.tags.all %}
                                             <a href="">{{ tag.title }}</a>,
                                             {% endfor %}
+                                    {% endif %}
                                     </div>
                                     <h2>توضيحات محصول</h2>
                                     <div class="product-content">
