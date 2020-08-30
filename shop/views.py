@@ -85,7 +85,11 @@ class ProductComment(SingleObjectMixin, FormView):
         return super(ProductComment, self).form_valid(form)
 
     def get_success_url(self):
-        return reverse('product-detail', kwargs={'slug': uri_to_iri(self.object.slug)})
+        return reverse('product-detail', kwargs={'slug': self.object.slug})
+
+    def get_object(self, **kwargs):
+        slug = self.kwargs.get('slug')
+        return get_object_or_404(Product, slug=uri_to_iri(slug))
 
 
 class AuthorDetail(View):
