@@ -21,6 +21,7 @@ class FormMixin(ContextMixin):
         return ctx
 
 
+# TODO cache
 class TopSelMixin(ContextMixin):
     def get_context_data(self, *args, **kwargs):
         ctx = super(TopSelMixin, self).get_context_data(**kwargs)
@@ -28,6 +29,7 @@ class TopSelMixin(ContextMixin):
         return ctx
 
 
+# TODO cache
 class RecentlyMixin(ContextMixin):
     def get_context_data(self, *args, **kwargs):
         ctx = super(RecentlyMixin, self).get_context_data(**kwargs)
@@ -38,7 +40,7 @@ class RecentlyMixin(ContextMixin):
 class LatestMixin(ContextMixin):
     def get_context_data(self, *args, **kwargs):
         ctx = super(LatestMixin, self).get_context_data(**kwargs)
-        ctx['latest_product'] = Product.objects.all()[3:9]
+        ctx['latest_product'] = Product.objects.all().order_by('-id')[0:3]
         return ctx
 
 
