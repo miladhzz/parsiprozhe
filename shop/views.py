@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DetailView
 from django.utils.encoding import uri_to_iri
 from .models import Product, OrderItem, Order
 from django.views.generic.base import ContextMixin
@@ -14,9 +14,9 @@ from parsiprozhe.settings import MERCHANT
 from logger import statistic
 
 
-class FormMixin(ContextMixin):
+class FormContextMixin(ContextMixin):
     def get_context_data(self, *args, **kwargs):
-        ctx = super(FormMixin, self).get_context_data(**kwargs)
+        ctx = super(FormContextMixin, self).get_context_data(**kwargs)
         ctx['cart_product_from'] = forms.CartAddProductForm()
         return ctx
 
@@ -44,11 +44,27 @@ class LatestMixin(ContextMixin):
         return ctx
 
 
-class ProductList(FormMixin, ListView):
+class ProductList(FormContextMixin, ListView):
     model = Product
     template_name = 'product_list.html'
     paginate_by = 12
     queryset = Product.objects.all()
+
+
+class ProductDetail(FormContextMixin, DetailView):
+    model = Product
+    template_name = 'product_detail.html'
+
+    def get_queryset(self, *args, **kwargs):
+        slug = self.kwargs.get('slug')
+        queryset = Product.objects.filter(slug=uri_to_iri(slug))
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comment_form'] = forms.CommentForm()
+        return context
+
 
 
 def product_detail(request, slug):
@@ -74,7 +90,7 @@ def product_detail(request, slug):
                                                    'new_comment': new_comment })
 
 
-class Home(TopSelMixin, RecentlyMixin, LatestMixin, FormMixin, ListView):
+class Home(TopSelMixin, RecentlyMixin, LatestMixin, FormContextMixin, ListView):
     model = Product
     template_name = "home.html"
 
