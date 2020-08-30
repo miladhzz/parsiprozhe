@@ -1,5 +1,8 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, reverse
+from django.views.generic import View
 from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic.edit import FormView
+from django.views.generic.detail import SingleObjectMixin
 from django.utils.encoding import uri_to_iri
 from .models import Product, OrderItem, Order
 from django.views.generic.base import ContextMixin
@@ -9,7 +12,7 @@ from .cart import Cart
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from zeep import Client
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from parsiprozhe.settings import MERCHANT
 from logger import statistic
 
@@ -51,14 +54,9 @@ class ProductList(FormContextMixin, ListView):
     queryset = Product.objects.all()
 
 
-class ProductDetail(FormContextMixin, DetailView):
+class ProductDisplay(FormContextMixin, DetailView):
     model = Product
     template_name = 'product_detail.html'
-
-    # def get_queryset(self, *args, **kwargs):
-    #     slug = self.kwargs.get('slug')
-    #     queryset = Product.objects.filter(slug=uri_to_iri(slug))
-    #     return queryset
 
     def get_object(self, **kwargs):
         slug = self.kwargs.get('slug')
@@ -67,8 +65,41 @@ class ProductDetail(FormContextMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['comment_form'] = forms.CommentForm()
+        context['comments'] = self.object.comment_set.filter(is_active=True)
         return context
 
+
+class ProductComment(SingleObjectMixin, FormView):
+    template_name = 'product_detail.html'
+    form_class = forms.CommentForm
+    model = Product
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().post(request, *args, **kwargs)
+
+    def form_valid(self, form, **kwargs):
+        new_form = form.save(commit=False)
+        print(self.object.id)
+        new_form.product = self.object
+        new_form.save()
+        context = self.get_context_data(**kwargs)
+        context['new_comment'] = new_form
+        return super().form_valid(form, **kwargs)
+
+    def get_success_url(self):
+        return reverse('product-detail', kwargs={'slug': self.object.slug})
+
+
+class AuthorDetail(View):
+
+    def get(self, request, *args, **kwargs):
+        view = ProductDisplay.as_view()
+        return view(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        view = ProductComment.as_view()
+        return view(request, *args, **kwargs)
 
 
 def product_detail(request, slug):
