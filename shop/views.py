@@ -88,7 +88,7 @@ class ProductComment(SingleObjectMixin, FormView):
         return super().form_valid(form, **kwargs)
 
     def get_success_url(self):
-        return reverse('product-detail', kwargs={'slug': self.object.slug})
+        return reverse('product-detail', kwargs={'str': self.object.slug})
 
 
 class AuthorDetail(View):
