@@ -78,17 +78,14 @@ class ProductComment(SingleObjectMixin, FormView):
         self.object = self.get_object()
         return super().post(request, *args, **kwargs)
 
-    def form_valid(self, form, **kwargs):
+    def form_valid(self, form):
         new_form = form.save(commit=False)
-        print(self.object.id)
         new_form.product = self.object
         new_form.save()
-        context = self.get_context_data(**kwargs)
-        context['new_comment'] = new_form
-        return super().form_valid(form, **kwargs)
+        return super(ProductComment, self).form_valid(form)
 
     def get_success_url(self):
-        return reverse('product-detail', kwargs={'str': self.object.slug})
+        return reverse('product-detail', kwargs={'slug': uri_to_iri(self.object.slug)})
 
 
 class AuthorDetail(View):
