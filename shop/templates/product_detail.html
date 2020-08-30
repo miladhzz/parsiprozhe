@@ -14,7 +14,16 @@
             </div>
         </div>
     </div>
-
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
 
     <div class="single-product-area">
         <div class="zigzag-bottom"></div>
@@ -112,9 +121,6 @@
                                             </div>
                                         {% endfor %}
                                         <hr />
-                                        {% if new_comment %}
-                                            <h4 class="new-commnet">نظر شما با موفقیت ثبت شد، در اولین فرصت بررسی میکنیم.</h4>
-                                        {% else %}
                                             {% if product.is_active_comment %}
                                             <h4>سوال یا نظرتان را بنویسید:</h4>
                                             <form action="." method="post">
@@ -123,7 +129,6 @@
                                                 <input type="submit" value="ثبت نظر" class="btn btn-primary" />
                                             </form>
                                             {% endif %}
-                                        {% endif %}
                                       </div>
                                 </div>
                             </div>

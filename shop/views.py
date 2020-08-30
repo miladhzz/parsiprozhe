@@ -15,6 +15,7 @@ from zeep import Client
 from django.http import HttpResponse, HttpResponseRedirect
 from parsiprozhe.settings import MERCHANT
 from logger import statistic
+from django.contrib import messages
 
 
 class FormContextMixin(ContextMixin):
@@ -82,6 +83,7 @@ class ProductComment(SingleObjectMixin, FormView):
         new_form = form.save(commit=False)
         new_form.product = self.object
         new_form.save()
+        messages.info(self.request, message="نظر شما با موفقیت ثبت شد، در اولین فرصت بررسی میکنیم.")
         return super(ProductComment, self).form_valid(form)
 
     def get_success_url(self):
