@@ -55,10 +55,15 @@ class ProductDetail(FormContextMixin, DetailView):
     model = Product
     template_name = 'product_detail.html'
 
-    def get_queryset(self, *args, **kwargs):
-        slug = self.kwargs.get('slug')
-        queryset = Product.objects.filter(slug=uri_to_iri(slug))
-        return queryset
+    # def get_queryset(self, *args, **kwargs):
+    #     slug = self.kwargs.get('slug')
+    #     queryset = Product.objects.filter(slug=uri_to_iri(slug))
+    #     return queryset
+
+    def get_object(self, **kwargs):
+        slg = self.kwargs.get('slug')
+        print(slg)
+        return get_object_or_404(Product, slug=uri_to_iri(slg))
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
