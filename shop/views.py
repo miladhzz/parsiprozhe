@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views.generic import View
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import (
+    ListView, CreateView, DetailView, RedirectView
+)
 from django.views.generic.edit import FormView
 from django.views.generic.detail import SingleObjectMixin
 from django.utils.encoding import uri_to_iri
@@ -11,6 +13,7 @@ from . import forms
 from .cart import Cart
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from zeep import Client
 from django.http import HttpResponse, HttpResponseRedirect
 from parsiprozhe.settings import MERCHANT
@@ -103,29 +106,6 @@ class AuthorDetail(View):
     def post(self, request, *args, **kwargs):
         view = ProductComment.as_view()
         return view(request, *args, **kwargs)
-
-
-def product_detail(request, slug):
-    product = get_object_or_404(Product, slug=uri_to_iri(slug))
-    comments = product.comment_set.filter(is_active=True)
-
-    new_comment = None
-    if request.method == 'POST':
-        comment_form = forms.CommentForm(data=request.POST)
-
-        if comment_form.is_valid():
-            new_comment = comment_form.save(commit=False)
-            new_comment.product = product
-            new_comment.save()
-    else:
-        comment_form = forms.CommentForm()
-
-    statistic.log(request)
-    return render(request, 'product_detail.html', {'product': product,
-                                                   'cart_product_from': forms.CartAddProductForm(),
-                                                   'comments': comments,
-                                                   'comment_form': comment_form,
-                                                   'new_comment': new_comment })
 
 
 class Home(TopSelMixin, RecentlyMixin, LatestMixin, FormContextMixin, ListView):
@@ -260,7 +240,10 @@ class SignUp(CreateView):
     success_url = '../login'
 
 
-@login_required
-def logout_user(request):
-    logout(request)
-    return render(request, 'registration/logout.html')
+@method_decorator(login_required, name='dispatch')
+class LogoutUser(RedirectView):
+    pattern_name = 'home'
+
+    def get_redirect_url(self, *args, **kwargs):
+        logout(self.request)
+        return super().get_redirect_url(*args, **kwargs)

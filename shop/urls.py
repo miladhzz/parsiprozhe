@@ -24,7 +24,7 @@ urlpatterns = [
     path('category/<slug>', views.CategoryProductList.as_view(), name='category'),
     path('registration/register/', views.SignUp.as_view(), name='register'),
     path('registration/login/', auth_views.LoginView.as_view(), name="login"),
-    path('registration/logout/', views.logout_user, name="logout"),
+    path('registration/logout/', views.LogoutUser.as_view(), name="logout"),
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 '''
 urlpatterns += [
