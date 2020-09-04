@@ -239,13 +239,13 @@ class CategoryProductList(FormContextMixin, ListView):
 
     def get_queryset(self):
         print(self.kwargs.get('slug'))
-        queryset = Product.objects.filter(category__slug=self.kwargs.get('slug'))
+        queryset = Product.objects.filter(category__slug=uri_to_iri(self.kwargs.get('slug')))
         return queryset
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
         try:
-            context["product"] = Category.objects.get(slug=self.kwargs.get('slug'))
+            context["product"] = Category.objects.get(slug=uri_to_iri(self.kwargs.get('slug')))
         except Category.DoesNotExist:
             pass
         return context
