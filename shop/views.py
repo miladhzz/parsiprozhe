@@ -1,7 +1,15 @@
-from django.shortcuts import render, redirect, get_object_or_404, reverse
+from django.shortcuts import (
+    render,
+    redirect,
+    get_object_or_404
+)
+from django.urls import reverse, reverse_lazy
 from django.views.generic import View
 from django.views.generic import (
-    ListView, CreateView, DetailView, RedirectView
+    ListView,
+    CreateView,
+    DetailView,
+    RedirectView
 )
 from django.views.generic.edit import FormView
 from django.views.generic.detail import SingleObjectMixin
@@ -237,7 +245,7 @@ class CategoryProductList(ListView):
 class SignUp(CreateView):
     template_name = 'registration/register.html'
     form_class = forms.RegisterForm
-    success_url = '../login'
+    success_url = reverse_lazy('login')
 
 
 @method_decorator(login_required, name='dispatch')
