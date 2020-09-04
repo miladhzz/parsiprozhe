@@ -14,7 +14,7 @@ from django.views.generic import (
 from django.views.generic.edit import FormView
 from django.views.generic.detail import SingleObjectMixin
 from django.utils.encoding import uri_to_iri
-from .models import Product, OrderItem, Order
+from .models import Product, OrderItem, Order, Category
 from django.views.generic.base import ContextMixin
 from django.views.decorators.http import require_POST
 from . import forms
@@ -233,13 +233,22 @@ def cart_detail(request):
     return render(request, 'cart.html', {'cart': cart})
 
 
-class CategoryProductList(ListView):
+class CategoryProductList(FormContextMixin, ListView):
     model = Product
     template_name = 'category_product_list.html'
 
     def get_queryset(self):
-        queryset = Product.objects.filter()
+        print(self.kwargs.get('slug'))
+        queryset = Product.objects.filter(category__slug=self.kwargs.get('slug'))
         return queryset
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data()
+        try:
+            context["product"] = Category.objects.get(slug=self.kwargs.get('slug'))
+        except Category.DoesNotExist:
+            pass
+        return context
 
 
 class SignUp(CreateView):

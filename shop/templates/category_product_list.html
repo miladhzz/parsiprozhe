@@ -1,12 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Products</title>
-</head>
-<body>
-    {% for product in product_list %}
-        <p>{{product.title}}</p>
-    {% endfor %}
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} پارسی پروژه - دسته بندی ها{% endblock %}
+{% block content %}
+     <div class="product-big-title-area">
+        <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="product-bit-title text-center">
+                            <h2>محصولات بر اساس دسته بندی</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container detail">
+        <h3> محصولات مرتبط بر اساس دسته بندی: {{ product }}</h3>
+        <hr />
+
+        {% for product in product_list %}
+            <div class="category-list">
+                <div class="single-product" style="direction: rtl;">
+                    <div class="product-f-image">
+                        <img src="{{ product.pic.url }}" alt="{{ product.title }}">
+
+                        <div class="product-hover">
+                            <!--<a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>-->
+                            <form action="{% url 'cart_add' product.id %}" method="post">
+                                {{ cart_product_from }}
+                                {% csrf_token %}
+                                <input class="add-to-cart-link" type="submit" value="افزودن به سبد"/>
+                            </form>
+                            <a href="{{ product.get_absolute_url }}" class="view-details-link"><i class="fa fa-link"></i> مشاهده جرئیات</a>
+                        </div>
+                    </div>
+
+                    <h2><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></h2>
+
+                    <div class="product-carousel-price">
+                        {% if product.has_discount %}
+                    {% if product.super_price == 0 %}
+                        <ins>رایگان</ins>
+                        <del>{{ product.price }}تومان</del>
+                        {% else %}
+                    <ins>{{ product.super_price }}تومان</ins>
+                    <del>{{ product.price }}تومان</del>
+                        {% endif %}
+                    {% else %}
+                    {% if product.price == 0 %}
+                        <ins>رایگان</ins>
+                        {% else %}
+                        <ins>{{ product.price }}تومان</ins>
+                     {% endif %}
+                {% endif %}
+                    </div>
+                </div>
+
+        </div>
+        {% endfor %}
+    </div>
+
+
+{% endblock %}

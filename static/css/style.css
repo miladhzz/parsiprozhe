@@ -1271,3 +1271,15 @@ div.contact-form{
 div.product-content{
 	line-height: 30px;
 }
+
+div.detail{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+div.category-list div.single-product{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 1px solid #e4e4e4;
+    max-width: 300px;
+}
