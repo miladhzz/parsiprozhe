@@ -161,9 +161,9 @@ def to_bank(request, order_id):
     order.save()
     result = client.service.PaymentRequest(MERCHANT, amount, description, email, mobile, CallbackURL)
     if result.Status == 100 and len(result.Authority) == 36:
-        order.authority = int(result.Authority)
+        order.authority = str(result.Authority)
         order.save()
-        return redirect('https://www.zarinpal.com/pg/StartPay/' + str(int(result.Authority)))
+        return redirect('https://www.zarinpal.com/pg/StartPay/' + str(result.Authority))
     else:
         return HttpResponse('Error code: ' + str(result.Status))
 
