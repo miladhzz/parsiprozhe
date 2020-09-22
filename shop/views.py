@@ -171,7 +171,7 @@ def to_bank(request, order_id):
 def callback(request):
     statistic.log(request)
     if request.GET.get('Status') == 'OK':
-        authority = int(request.GET['Authority'])
+        authority = str(request.GET['Authority'])
         order = get_object_or_404(Order, authority=authority)
         result = client.service.PaymentVerification(MERCHANT, authority, order.amount)
         if result.Status == 100:
