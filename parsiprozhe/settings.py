@@ -4,19 +4,20 @@ import json
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-DEBUG = False
+DEBUG = True
 
-secret = json.load(open(os.path.join(BASE_DIR, 'secret.json')))
-secret_dev = json.load(open(os.path.join(BASE_DIR, 'secret_dev.json')))
 
-def get_secret(setting, secrets=secret, secrets_dev=secret_dev):
+def get_secret(setting):
     """Get secret setting or fail with ImproperlyConfigured"""
     try:
         if DEBUG:
+            secrets_dev = json.load(open(os.path.join(BASE_DIR, 'secret.json')))
             return secrets_dev[setting]
+        secrets = json.load(open(os.path.join(BASE_DIR, 'secret_dev.json')))
         return secrets[setting]
     except KeyError:
         raise ImproperlyConfigured("Set the {} setting".format(setting))
+
 
 SECRET_KEY = get_secret('SECRET_KEY')
 
@@ -109,8 +110,8 @@ USE_TZ = False
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-STATIC_ROOT  ='/home/fahandej/parsiprozhe.ir/static'
-MEDIA_ROOT  ='/home/fahandej/parsiprozhe.ir/media'
+STATIC_ROOT = '/home/fahandej/parsiprozhe.ir/static'
+MEDIA_ROOT = '/home/fahandej/parsiprozhe.ir/media'
 
 STATICFILES_DIRS = [
     BASE_DIR + "/assets",

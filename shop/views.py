@@ -142,7 +142,7 @@ def checkout(request):
                                              'form': form})
 
 
-client = Client('https://www.zarinpal.com/pg/services/WebGate/wsdl')
+zarinpall_gateway = 'https://www.zarinpal.com/pg/services/WebGate/wsdl'
 CallbackURL = 'http://parsiprozhe.ir/callback/'
 
 
@@ -159,6 +159,7 @@ def to_bank(request, order_id):
         return render(request, 'bank.html', {'order_items': order_items})
     order.amount = amount
     order.save()
+    client = Client(zarinpall_gateway)
     result = client.service.PaymentRequest(MERCHANT, amount, description, email, mobile, CallbackURL)
     if result.Status == 100 and len(result.Authority) == 36:
         order.authority = str(result.Authority)
@@ -173,6 +174,7 @@ def callback(request):
     if request.GET.get('Status') == 'OK':
         authority = str(request.GET['Authority'])
         order = get_object_or_404(Order, authority=authority)
+        client = Client(zarinpall_gateway)
         result = client.service.PaymentVerification(MERCHANT, authority, order.amount)
         if result.Status == 100:
             order_items = OrderItem.objects.filter(order=order)
