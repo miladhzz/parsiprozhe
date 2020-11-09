@@ -11,9 +11,9 @@ def get_secret(setting):
     """Get secret setting or fail with ImproperlyConfigured"""
     try:
         if DEBUG:
-            secrets_dev = json.load(open(os.path.join(BASE_DIR, 'secret.json')))
+            secrets_dev = json.load(open(os.path.join(BASE_DIR, 'secret_dev.json')))
             return secrets_dev[setting]
-        secrets = json.load(open(os.path.join(BASE_DIR, 'secret_dev.json')))
+        secrets = json.load(open(os.path.join(BASE_DIR, 'secret.json')))
         return secrets[setting]
     except KeyError:
         raise ImproperlyConfigured("Set the {} setting".format(setting))
