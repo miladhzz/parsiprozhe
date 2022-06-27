@@ -12,7 +12,7 @@ dnspython==1.16.0
 idna==2.9
 isodate==0.6.0
 lxml==4.5.0
-mysql-connector-python==8.0.5
+mysql-connector-python==8.0.14
 Pillow==7.1.0
 protobuf==3.6.1
 pytz==2019.3
